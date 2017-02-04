@@ -1,2 +1,2 @@
 # akoalita
-Web interface for Fanorona
+Fanorona web game

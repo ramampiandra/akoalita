@@ -1,0 +1,40 @@
+.header {
+    width: 100%;
+    background-color: black;
+    height: 50px;
+    min-width: 1060px;
+}
+
+#header_container {
+    padding-left: 0;
+    position: relative;
+    width: 1060px;
+    color: #e4e6e8;
+}
+#header_container {
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    padding-top : 5px;
+}
+#logo {
+    float: left;
+    font-size: 25px;
+}
+#user {
+    float: right;
+    /*font-weight: bold;*/
+    margin-top: 10px;
+    cursor :    pointer;
+}
+
+#pop_pup_1 {
+    position : absolute;
+    right : 0;
+    top : 44px;
+    background : #fff none repeat scroll 0 0;
+    width: 200px;
+    height: 100px;
+    box-shadow : 1px 3px 4px rgba(12, 13, 14, 0.2)
+}
