@@ -36,7 +36,7 @@ public class DataBaseConfig {
 		vendorAdapter.setShowSql(Boolean.TRUE);
 		factory.setDataSource(dataSource());
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("akoalita.comteen.domain.entity");
+		factory.setPackagesToScan("mg.comteen.domain.entity");
 		factory.setPersistenceUnitName("akoalita");
 		Properties jpaProperties = new Properties();
 		jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
