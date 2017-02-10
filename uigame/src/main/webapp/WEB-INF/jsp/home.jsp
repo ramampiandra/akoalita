@@ -5,8 +5,9 @@
 <c:url value="/resources/css/bootstrap/bootstrap.min.css" var="css_bootstrap_url"/>
 <c:url value="/resources/css/app/home.css" var="css_app_index_url"/>
 <!-- Js File -->
-<c:url value="/resources/js/bootstrap/bootstrap.min.js" var="js_bootstrap_url"/>
+<c:url value="/resources/js/d/bootstrap.min.js" var="js_bootstrap_url"/>
 <c:url value="/resources/js/app/index.js" var="js_app_index_url"/>
+
 
 <!--  -->
 <c:url value="/auth/facebook" var="facebook_url" />
