@@ -1,14 +1,16 @@
 <!DOCTYPE html>
+<%@ page isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
-    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <meta name="keyword" content="Akoalita, ramampiandra, fanorona, Java">
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <title>Blank | Creative - Bootstrap 3 Responsive Admin Template</title>
+    <title>Akoalita</title>
     
     <c:url value="/resources/css/bootstrap/bootstrap.min.css" var = "bootstrap_min"/>
     <c:url value="/resources/css/bootstrap/bootstrap-theme.css" var = "bootstrap_theme"/>
@@ -48,7 +50,7 @@
             </div>
 
             <!--logo start-->
-            <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+            <a href="index.html" class="logo">Akoalita <span class="lite">Beta</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
