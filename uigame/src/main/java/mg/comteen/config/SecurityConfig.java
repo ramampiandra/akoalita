@@ -8,7 +8,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	    http
@@ -32,7 +32,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	            	   .postLoginUrl("/index")
 	            	   //.postFailureUrl("/error_login")
 	            	   .signupUrl("/signup"));
-	}
-	
-	
+	}	
 }

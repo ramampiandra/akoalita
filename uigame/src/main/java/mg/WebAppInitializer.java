@@ -20,7 +20,7 @@ import mg.comteen.WebMvcConfig;
  * @author rama
  *
  */
-public class WebAppInitializer implements WebApplicationInitializer{
+public class WebAppInitializer implements WebApplicationInitializer {
 
     public void onStartup(ServletContext container) {
       // Create the 'root' Spring application context
@@ -45,7 +45,5 @@ public class WebAppInitializer implements WebApplicationInitializer{
         container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
       dispatcher.setLoadOnStartup(1);
       dispatcher.addMapping("/");
-      
-      
     }
 }
