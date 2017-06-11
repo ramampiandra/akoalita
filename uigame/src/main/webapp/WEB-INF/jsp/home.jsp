@@ -12,12 +12,22 @@
 
     <title>Akoalita</title>
     
+    <!-- link css -->
     <c:url value="/resources/css/bootstrap/bootstrap.min.css" var = "bootstrap_min"/>
     <c:url value="/resources/css/bootstrap/bootstrap-theme.css" var = "bootstrap_theme"/>
     <c:url value="/resources/css/bootstrap/elegant-icons-style.css" var = "elegant_icon"/>
     <c:url value="/resources/css/bootstrap/font-awesome.css" var = "font_awesone"/>
     <c:url value="/resources/css/bootstrap/style.css" var = "style"/>
     <c:url value="/resources/css/bootstrap/style-responsive.css" var = "style_responsive"/>
+    
+    <!-- link js -->
+    <c:url value="/resources/js/jquery/jquery.js" var = "jquery_js"/>
+    <c:url value="/resources/js/bootstrap/bootstrap.min.js" var = "bootstrap_js"/>
+    <c:url value="/resources/js/jquery/jquery.scrollTo.min.js" var = "jquery_scroll_js"/>
+    <c:url value="/resources/js/jquery/jquery.nicescroll.js" var = "jquery_nice_js"/>
+    <c:url value="/resources/js/jquery/jquery.nicescroll.js" var = "jquery_nice_js"/>
+    <c:url value="/resources/js/app/script.js" var = "script_template_js"/>
+    <c:url value="/resources/js/pixi/pixi.min.js" var = "pixi_js"/>
     
     <!-- Bootstrap CSS -->    
     <link href="${bootstrap_min}" rel="stylesheet">
@@ -271,7 +281,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username">${username}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -389,7 +399,7 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          <div class="row">
+            <div class="row">
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class="fa fa fa-bars"></i> Pages</h3>
                     <ol class="breadcrumb">
@@ -413,19 +423,18 @@
                     Licensing information: https://bootstrapmade.com/license/
                     Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
                 -->
-                <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
   </section>
   <!-- container section end -->
     <!-- javascripts -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="${jquery_js}"></script>
+    <script src="${bootstrap_js}"></script>
     <!-- nice scroll -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
-    <script src="js/scripts.js"></script>
-
-
+    <script src="${jquery_scroll_js}"></script>
+    <script src="${jquery_nice_js}" type="text/javascript"></script><!--custome script for all page-->
+    <script src="${script_template_js}"></script>
+    <!-- pixi -->
+    <script src="${pixi_js}"></script>
   </body>
 </html>
