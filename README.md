@@ -1,2 +1,2 @@
 # akoalita
-Fanorona web game
+Fanorona Game Engine
