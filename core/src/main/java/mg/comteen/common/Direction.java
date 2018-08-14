@@ -1,6 +1,3 @@
-/**
- * 
- */
 package mg.comteen.common;
 
 /**

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package mg.comteen;
 
 import mg.comteen.common.Move;
