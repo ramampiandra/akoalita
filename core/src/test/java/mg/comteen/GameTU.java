@@ -35,6 +35,15 @@ public class GameTU {
 	 * 28 29 30 31 32 33 34 35 36
 	 * 37 38 39 40 41 42 43 44 45
 	 * 
+	 * State by default : 
+	 * B : Black piece
+	 * W : White piece
+	 * E : Empty piece
+	 * B  B  B  B  B  B  B  B  B
+	 * B  B  B  B  B  B  B  B  B
+	 * B  W  B  W  E  B  W  B  W
+	 * W  W  W  W  W  W  W  W  W
+	 * W  W  W  W  W  W  W  W  W
 	 */
 	@Test
 	public void handleGameTU() throws Exception {

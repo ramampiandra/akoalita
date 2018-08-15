@@ -50,15 +50,17 @@ public class GameImpl extends Move implements Game {
 
 			// The api used or not direction parameter for the processing
 			nextMove(param);
-
-			// Begin processing
-			param.setCurrentPlayer(getCurrentPlayer());
-			param.setCurrentPosition(currentPosition);
-			param.setNextPosition(nextPosition);
-			param.setDirection();
 			
 			// Processing
 			try {
+				// Begin processing
+				//Set the current player from source and position
+				//Throw runtime exception if current position is empty
+				param.setCurrentPlayer(getCurrentPlayer());
+				param.setCurrentPosition(currentPosition);
+				param.setNextPosition(nextPosition);
+				param.setDirection();
+				
 				rules.processChange(board, param);
 				res.setResult(true);
 			} catch (Exception ex) {
@@ -171,13 +173,19 @@ public class GameImpl extends Move implements Game {
 		Player p = null;
 		if (currentPosition != null) {
 			int index = board[currentPosition.getX()][currentPosition.getY()] - 1;
-			// if it's not the same user
-			if(index != lastPlayer) {
-				// Reset state last player
-				player[lastPlayer].resetStates();
-				lastPlayer = index;
+			//If current position is not empty i.e E
+			//-1 means the current position is empty
+			if(index > -1) {
+				// if it's not the same user
+				if(index != lastPlayer) {
+					// Reset state last player
+					player[lastPlayer].resetStates();
+					lastPlayer = index;
+				}
+				p = player[index];
+			} else {
+				throw new FanoronaException("Invalid move. Current Position is Empty");
 			}
-			p = player[index];
 		}
 		return p;
 	}
