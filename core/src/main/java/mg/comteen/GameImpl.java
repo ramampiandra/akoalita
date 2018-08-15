@@ -28,7 +28,10 @@ public class GameImpl extends Move implements Game {
 	private Rules rules = RulesImpl.getInstance();
 
 	public GameImpl() {
-		// Initialization player ids respectively 1 and 2
+		/* Initialization player ids respectively 1 and 2
+		 * In the future, this initialization will be replaced by ID user or
+		 * IP Address User  
+		 */
 		player[0] = new Player(1);
 		player[1] = new Player(2);
 	}
