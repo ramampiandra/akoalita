@@ -100,7 +100,7 @@ public class RulesImpl extends Move implements Rules {
 		int y = next.getY();
 		return  (x >= 0 && x <= 4) // x (row) must be between 0 and 4
 				&& (y >= 0 && y <= 8) // y (column) must be between 0 and 8
-				&& board[x][y] == 0; // the new (x,y) must be empty, Pieces can only move onto empty spaces
+				&& board[x][y] == 0; // the new (x,y)  must be empty, Pieces can only move onto empty spaces
 	}
 	
 	private boolean verifyPreviousActionPlayer(Parameter param) {
