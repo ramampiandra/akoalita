@@ -32,12 +32,9 @@ public class RulesImpl extends Move implements Rules {
 	 */
 	public boolean checkIfNextPositionValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
-		Player player = param.getCurrentPlayer();
-		int x = next.getX();
-		int y = next.getY();
 		boolean isValid = false;
-		if ((x >= 0 && x <= 4) && (y >= 0 && y <= 8) && board[x][y] == 0) {
-			if (!player.isEqualToLastPosition(next) && player.isValidDirection(param.getDirection())) {
+		if (verifyCoordinateValidation(board, param)) {
+			if (verifyPreviousActionPlayer(param)) {
 				isValid = true;
 			} else {
 				throw new FanoronaException("Invalid move destination : " + next);
@@ -95,6 +92,22 @@ public class RulesImpl extends Move implements Rules {
 			}
 			position = getNext(direction, position);
 		}
+	}
+	
+	private boolean verifyCoordinateValidation(int[][] board, Parameter param) {
+		Position next = param.getNextPosition();
+		int x = next.getX();
+		int y = next.getY();
+		return  (x >= 0 && x <= 4) // x (row) must be between 0 and 4
+				&& (y >= 0 && y <= 8) // y (column) must be between 0 and 8
+				&& board[x][y] == 0; // the new (x,y) must be empty, Pieces can only move onto empty spaces
+	}
+	
+	private boolean verifyPreviousActionPlayer(Parameter param) {
+		Player player = param.getCurrentPlayer(); // Get the current player
+		Position next = param.getNextPosition(); // Get the next position
+		return !player.isEqualToLastPosition(next) // Player can't move on the direct previous position 
+				&& player.isValidDirection(param.getDirection()); // The piece can't make same direction during a relay capture
 	}
 
 }
