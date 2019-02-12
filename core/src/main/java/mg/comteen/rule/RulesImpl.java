@@ -33,8 +33,8 @@ public class RulesImpl extends Move implements Rules {
 	public boolean checkIfNextPositionValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
 		boolean isValid = false;
-		if (verifyCoordinateValidation(board, param)) {
-			if (verifyPreviousActionPlayer(param)) {
+		if (isCoordinateValid(board, param)) {
+			if (isPositionValid(param)) {
 				isValid = true;
 			} else {
 				throw new FanoronaException("Invalid move destination : " + next);
@@ -94,7 +94,7 @@ public class RulesImpl extends Move implements Rules {
 		}
 	}
 	
-	private boolean verifyCoordinateValidation(int[][] board, Parameter param) {
+	private boolean isCoordinateValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
 		int x = next.getX();
 		int y = next.getY();
@@ -103,7 +103,7 @@ public class RulesImpl extends Move implements Rules {
 				&& board[x][y] == 0; // the new (x,y)  must be empty, Pieces can only move onto empty spaces
 	}
 	
-	private boolean verifyPreviousActionPlayer(Parameter param) {
+	private boolean isPositionValid(Parameter param) {
 		Player player = param.getCurrentPlayer(); // Get the current player
 		Position next = param.getNextPosition(); // Get the next position
 		return !player.isEqualToLastPosition(next) // Player can't move on the direct previous position 

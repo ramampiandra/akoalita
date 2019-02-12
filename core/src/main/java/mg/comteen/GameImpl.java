@@ -172,6 +172,10 @@ public class GameImpl extends Move implements Game {
 	private Player getCurrentPlayer() {
 		Player p = null;
 		if (currentPosition != null) {
+			/*
+			 * The retrieving of current player is based on the index retrieved from
+			 * the currentPosition X and Y
+			 */
 			int index = board[currentPosition.getX()][currentPosition.getY()] - 1;
 			//If current position is not empty i.e E
 			//-1 means the current position is empty

@@ -69,12 +69,17 @@ public class GameTU {
 		// 1 Means Advance
 		Result<String> res = game.handleGame(states, param);
 		
+		//printBoard(res);
+		
 		param.setDirection(-1);
+/*		param.setSourceStatePosition(23);
+		param.setDestStatePosition(15);*/
 		param.setSourceStatePosition(24);
 		param.setDestStatePosition(15);
-		// withdraw move
-		param.setTypeMove(-1);
+		param.setTypeMove(1);
 		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(15);
@@ -120,7 +125,7 @@ public class GameTU {
 		res = game.handleGame(res.getData(), param);
 		System.out.println(res.getMessage());
 
-		printBoard(res);
+		
 
 	}
 
