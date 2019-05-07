@@ -3,16 +3,16 @@ package mg.comteen.common;
 public abstract class Move {
 
 	public static enum Type {
-		ADVANCE, WITHDRAW, PAIKA, SACRIFICE
+		CAPTURING_ADVANCE, CAPTURING_WITHDRAWALL, PAIKA, SACRIFICE
 	}
 
 	protected Type type;
 
 	protected void setTypeMove(int typeMove) {
-		if (typeMove == 1) {
-			type = Type.ADVANCE;
-		} else if (typeMove == -1) {
-			type = Type.WITHDRAW;
+		if (typeMove == 1001) {
+			type = Type.CAPTURING_ADVANCE;
+		} else if (typeMove == 1002) {
+			type = Type.CAPTURING_WITHDRAWALL;
 		}
 	}
 
@@ -113,7 +113,7 @@ public abstract class Move {
 	 */
 	public void initMoveHandler(Parameter param) {
 		int direction = param.getDirection();
-		if (type != null && type == Type.WITHDRAW) {
+		if (type != null && type == Type.CAPTURING_WITHDRAWALL) {
 			switch (direction) {
 			case Direction.TOP_LEFT:
 				direction = Direction.BOTTOM_RIGHT;

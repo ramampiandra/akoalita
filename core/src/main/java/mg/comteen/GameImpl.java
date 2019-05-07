@@ -173,7 +173,7 @@ public class GameImpl extends Move implements Game {
 		Player p = null;
 		if (currentPosition != null) {
 			/*
-			 * The retrieving of current player is based on the index retrieved from
+			 * The current player is based on the index retrieved from
 			 * the currentPosition X and Y
 			 */
 			int index = board[currentPosition.getX()][currentPosition.getY()] - 1;

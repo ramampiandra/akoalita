@@ -6,13 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import mg.comteen.common.Direction;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Result;
 
 public class GameTU {
 
 	private GameImpl game = null;
+	
+	private final int CAPTURING_ADVANCE = 1001;
+	
+	private final int CAPTURING_WITHDRAWALL = 1002;
 
 	private String states;
 
@@ -65,18 +68,18 @@ public class GameTU {
 		param.setSourceStatePosition(31);
 		param.setDestStatePosition(23);
 		// withdraw move
-		param.setTypeMove(1);
+		param.setTypeMove(CAPTURING_ADVANCE);
 		// 1 Means Advance
 		Result<String> res = game.handleGame(states, param);
 		
-		//printBoard(res);
+		printBoard(res);
 		
 		param.setDirection(-1);
 /*		param.setSourceStatePosition(23);
 		param.setDestStatePosition(15);*/
 		param.setSourceStatePosition(24);
 		param.setDestStatePosition(15);
-		param.setTypeMove(1);
+		param.setTypeMove(CAPTURING_WITHDRAWALL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
@@ -85,48 +88,55 @@ public class GameTU {
 		param.setSourceStatePosition(15);
 		param.setDestStatePosition(7);
 		// withdraw move
-		param.setTypeMove(-1);
+		param.setTypeMove(CAPTURING_WITHDRAWALL);
 		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(30);
 		param.setDestStatePosition(39);
 		// withdraw move
-		param.setTypeMove(-1);
+		param.setTypeMove(CAPTURING_WITHDRAWALL);
 		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(14);
 		param.setDestStatePosition(24);
 		// withdraw move
-		param.setTypeMove(1);
+		param.setTypeMove(CAPTURING_ADVANCE);
 		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(24);
 		param.setDestStatePosition(23);
 		// withdraw move
-		param.setTypeMove(1);
+		param.setTypeMove(CAPTURING_ADVANCE);
 		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(23);
 		param.setDestStatePosition(14);
 		// withdraw move
-		param.setTypeMove(-1);
+		param.setTypeMove(CAPTURING_WITHDRAWALL);
 		res = game.handleGame(res.getData(), param);
-		System.out.println(res.getMessage());
+		
+		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(14);
 		param.setDestStatePosition(23);
 		// withdraw move
-		param.setTypeMove(-1);
+		param.setTypeMove(CAPTURING_WITHDRAWALL);
 		res = game.handleGame(res.getData(), param);
-		System.out.println(res.getMessage());
-
 		
-
+		printBoard(res);
 	}
 
 	@Test
@@ -159,11 +169,17 @@ public class GameTU {
 	}
 
 	private void printBoard(Result<String> res) {
-		System.out.println(res.getData().substring(0, 9));
-		System.out.println(res.getData().substring(9, 18));
-		System.out.println(res.getData().substring(18, 27));
-		System.out.println(res.getData().substring(27, 36));
-		System.out.println(res.getData().substring(36, 45));
+		if(res.isResult()) {
+			System.out.println(res.getData().substring(0, 9));
+			System.out.println(res.getData().substring(9, 18));
+			System.out.println(res.getData().substring(18, 27));
+			System.out.println(res.getData().substring(27, 36));
+			System.out.println(res.getData().substring(36, 45));
+			System.out.print("\n");
+		} else {
+			System.out.println(res.getMessage());
+		}
+		
 	}
 
 }
