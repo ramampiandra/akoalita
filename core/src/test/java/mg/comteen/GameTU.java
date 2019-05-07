@@ -15,7 +15,7 @@ public class GameTU {
 	
 	private final int CAPTURING_ADVANCE = 1001;
 	
-	private final int CAPTURING_WITHDRAWALL = 1002;
+	private final int CAPTURING_WITHDRAWAL = 1002;
 
 	private String states;
 
@@ -79,7 +79,7 @@ public class GameTU {
 		param.setDestStatePosition(15);*/
 		param.setSourceStatePosition(24);
 		param.setDestStatePosition(15);
-		param.setTypeMove(CAPTURING_WITHDRAWALL);
+		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
@@ -88,7 +88,7 @@ public class GameTU {
 		param.setSourceStatePosition(15);
 		param.setDestStatePosition(7);
 		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWALL);
+		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
@@ -97,7 +97,7 @@ public class GameTU {
 		param.setSourceStatePosition(30);
 		param.setDestStatePosition(39);
 		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWALL);
+		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
@@ -124,7 +124,7 @@ public class GameTU {
 		param.setSourceStatePosition(23);
 		param.setDestStatePosition(14);
 		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWALL);
+		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
@@ -133,7 +133,7 @@ public class GameTU {
 		param.setSourceStatePosition(14);
 		param.setDestStatePosition(23);
 		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWALL);
+		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);

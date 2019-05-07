@@ -3,7 +3,7 @@ package mg.comteen.common;
 public abstract class Move {
 
 	public static enum Type {
-		CAPTURING_ADVANCE, CAPTURING_WITHDRAWALL, PAIKA, SACRIFICE
+		CAPTURING_ADVANCE, CAPTURING_WITHDRAWAL, PAIKA, SACRIFICE
 	}
 
 	protected Type type;
@@ -12,7 +12,7 @@ public abstract class Move {
 		if (typeMove == 1001) {
 			type = Type.CAPTURING_ADVANCE;
 		} else if (typeMove == 1002) {
-			type = Type.CAPTURING_WITHDRAWALL;
+			type = Type.CAPTURING_WITHDRAWAL;
 		}
 	}
 
@@ -113,7 +113,7 @@ public abstract class Move {
 	 */
 	public void initMoveHandler(Parameter param) {
 		int direction = param.getDirection();
-		if (type != null && type == Type.CAPTURING_WITHDRAWALL) {
+		if (type != null && type == Type.CAPTURING_WITHDRAWAL) {
 			switch (direction) {
 			case Direction.TOP_LEFT:
 				direction = Direction.BOTTOM_RIGHT;
