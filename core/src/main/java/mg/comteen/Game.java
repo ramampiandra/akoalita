@@ -6,7 +6,7 @@ import mg.comteen.exception.FanoronaException;
 
 /**
  * 
- * @author ramampiandra
+ * @author ramamj
  *
  */
 public interface Game {

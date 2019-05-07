@@ -9,7 +9,7 @@ import mg.comteen.exception.FanoronaException;
 /**
  * Implementation of the rules Singleton
  * 
- * @author rama
+ * @author ramamj
  *
  */
 public class RulesImpl extends Move implements Rules {

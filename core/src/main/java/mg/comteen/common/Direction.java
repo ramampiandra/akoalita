@@ -1,7 +1,7 @@
 package mg.comteen.common;
 
 /**
- * @author rama
+ * @author ramamj
  *
  */
 public interface Direction {

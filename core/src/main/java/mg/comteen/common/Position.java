@@ -2,7 +2,7 @@ package mg.comteen.common;
 
 /**
  * Position of Stone
- * @author rama
+ * @author ramamj
  *
  */
 public class Position {

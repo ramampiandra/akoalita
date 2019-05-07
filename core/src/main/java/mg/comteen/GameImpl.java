@@ -13,7 +13,7 @@ import mg.comteen.rule.RulesImpl;
 /**
  * This is the game entrypoint
  * 
- * @author rama
+ * @author ramamj
  */
 public class GameImpl extends Move implements Game {
 
