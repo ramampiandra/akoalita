@@ -40,7 +40,7 @@ public class RulesImpl extends Move implements Rules {
 				throw new FanoronaException("Invalid move destination : " + next);
 			}
 		} else {
-			throw new FanoronaException("Position out of range : " + next);
+			throw new FanoronaException("Position out of range or destination position is not empty : " + next);
 		}
 		return isValid;
 	}
@@ -68,7 +68,7 @@ public class RulesImpl extends Move implements Rules {
 	}
 
 	/**
-	 * The elimination is based on direction of the stone and we replace the
+	 * The capture is based on direction of the stone and we replace the
 	 * opposite stone by 0 i.e empty
 	 */
 	public void eliminateAdversary(int[][] board, Parameter param) {
@@ -84,10 +84,11 @@ public class RulesImpl extends Move implements Rules {
 		// Change the model board
 		while (isMoveValid(direction, position)) {
 			int item = board[position.getX()][position.getY()];
-			if (item == player) {
+			 // For item == 0, you can capture any UNBROKEN line of black pieces in this waa
+			if (item == player || item == 0) {
 				break;
-			} else if (item != 0) {
-				// Eliminate adversary
+			} else {
+				// Capture piece
 				board[position.getX()][position.getY()] = 0;
 			}
 			position = getNext(direction, position);

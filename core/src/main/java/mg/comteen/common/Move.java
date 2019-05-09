@@ -104,7 +104,7 @@ public abstract class Move {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * Change direction for type move withdraw
 	 * 
