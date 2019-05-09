@@ -88,7 +88,7 @@ public class RulesImpl extends Move implements Rules {
 			if (item == player || item == 0) {
 				break;
 			} else {
-				// Capture piece
+				// Capture pieces opponent 
 				board[position.getX()][position.getY()] = 0;
 			}
 			position = getNext(direction, position);

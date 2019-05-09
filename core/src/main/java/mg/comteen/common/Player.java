@@ -7,6 +7,10 @@ public class Player {
 
 	private int id;
 	
+	private String userName;
+	
+	private String email;
+	
 	private boolean isPlayerReady = false;
 
 	private Position lastPosition;
@@ -69,5 +73,22 @@ public class Player {
 	public void setLastPosition(Position lastPosition) {
 		this.lastPosition = lastPosition;
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 
 }

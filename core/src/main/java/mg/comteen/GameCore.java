@@ -15,7 +15,7 @@ import mg.comteen.rule.RulesImpl;
  * 
  * @author ramamj
  */
-public class GameImpl extends Move implements Game {
+public class GameCore extends Move implements Game {
 
 	private int[][] board = new int[5][9];
 
@@ -27,7 +27,7 @@ public class GameImpl extends Move implements Game {
 
 	private Rules rules = RulesImpl.getInstance();
 
-	public GameImpl() {
+	public GameCore() {
 		/* Initialization player ids respectively 1 and 2
 		 * In the future, this initialization will be replaced by ID user or
 		 * IP Address User  
@@ -188,7 +188,7 @@ public class GameImpl extends Move implements Game {
 				}
 				p = player[index];
 			} else {
-				throw new FanoronaException("Invalid move. Current Position is Empty");
+				throw new FanoronaException("Invalid move. Current position is empty");
 			}
 		}
 		return p;

@@ -113,34 +113,36 @@ public abstract class Move {
 	 */
 	public void initMoveHandler(Parameter param) {
 		int direction = param.getDirection();
+		//Change to the inverse direction for withdrawal capture
 		if (type != null && type == Type.CAPTURING_WITHDRAWAL) {
 			switch (direction) {
-			case Direction.TOP_LEFT:
-				direction = Direction.BOTTOM_RIGHT;
-				break;
-			case Direction.TOP_MIDDLE:
-				direction = Direction.BOTTOM_MIDDLE;
-				break;
-			case Direction.TOP_RIGHT:
-				direction = Direction.BOTTOM_LEFT;
-				break;
-			case Direction.MIDDLE_LEFT:
-				direction = Direction.MIDDLE_RIGHT;
-				break;
-			case Direction.MIDDLE_RIGHT:
-				direction = Direction.MIDDLE_LEFT;
-				break;
-			case Direction.BOTTOM_LEFT:
-				direction = Direction.TOP_RIGHT;
-				break;
-			case Direction.BOTTOM_MIDDLE:
-				direction = Direction.TOP_MIDDLE;
-				break;
-			case Direction.BOTTOM_RIGHT:
-				direction = Direction.TOP_LEFT;
-				break;
+				case Direction.TOP_LEFT:
+					direction = Direction.BOTTOM_RIGHT;
+					break;
+				case Direction.TOP_MIDDLE:
+					direction = Direction.BOTTOM_MIDDLE;
+					break;
+				case Direction.TOP_RIGHT:
+					direction = Direction.BOTTOM_LEFT;
+					break;
+				case Direction.MIDDLE_LEFT:
+					direction = Direction.MIDDLE_RIGHT;
+					break;
+				case Direction.MIDDLE_RIGHT:
+					direction = Direction.MIDDLE_LEFT;
+					break;
+				case Direction.BOTTOM_LEFT:
+					direction = Direction.TOP_RIGHT;
+					break;
+				case Direction.BOTTOM_MIDDLE:
+					direction = Direction.TOP_MIDDLE;
+					break;
+				case Direction.BOTTOM_RIGHT:
+					direction = Direction.TOP_LEFT;
+					break;
 			}
 			param.setStartProcessPosition(param.getCurrentPosition());
+			//Changing direction
 			param.setDirection(direction);
 		} else {
 			param.setStartProcessPosition(param.getNextPosition());

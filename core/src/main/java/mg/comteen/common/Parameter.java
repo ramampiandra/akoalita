@@ -2,7 +2,7 @@ package mg.comteen.common;
 
 public class Parameter {
 
-	// Direction of the Stone
+	// Direction of the piece
 	private int direction = -1;
 
 	// Destination position in the string state

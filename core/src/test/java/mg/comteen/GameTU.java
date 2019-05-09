@@ -11,7 +11,7 @@ import mg.comteen.common.Result;
 
 public class GameTU {
 
-	private GameImpl game = null;
+	private GameCore game = null;
 	
 	private final int CAPTURING_ADVANCE = 1001;
 	
@@ -21,7 +21,7 @@ public class GameTU {
 
 	@Before
 	public void setUp() throws Exception {
-		game = new GameImpl();
+		game = new GameCore();
 		states = "BBBBBBBBB" + "BBBBBBBBB" + "BWBWEBWBW" + "WWWWWWWWW" + "WWWWWWWWW";
 	}
 
@@ -77,66 +77,29 @@ public class GameTU {
 		param.setDirection(-1);
 /*		param.setSourceStatePosition(23);
 		param.setDestStatePosition(15);*/
-		param.setSourceStatePosition(24);
-		param.setDestStatePosition(15);
+		param.setSourceStatePosition(16);
+		param.setDestStatePosition(07);
 		param.setTypeMove(CAPTURING_WITHDRAWAL);
+		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
+		
+		param.setDirection(-1);
+		param.setSourceStatePosition(07);
+		param.setDestStatePosition(15);
+		param.setTypeMove(CAPTURING_ADVANCE);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
 		
 		param.setDirection(-1);
 		param.setSourceStatePosition(15);
-		param.setDestStatePosition(7);
-		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWAL);
-		res = game.handleGame(res.getData(), param);
-		
-		printBoard(res);
-		
-		param.setDirection(-1);
-		param.setSourceStatePosition(30);
-		param.setDestStatePosition(39);
-		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWAL);
-		res = game.handleGame(res.getData(), param);
-		
-		printBoard(res);
-		
-		param.setDirection(-1);
-		param.setSourceStatePosition(14);
-		param.setDestStatePosition(24);
-		// withdraw move
+		param.setDestStatePosition(25);
 		param.setTypeMove(CAPTURING_ADVANCE);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);
 		
-		param.setDirection(-1);
-		param.setSourceStatePosition(24);
-		param.setDestStatePosition(23);
-		// withdraw move
-		param.setTypeMove(CAPTURING_ADVANCE);
-		res = game.handleGame(res.getData(), param);
-		
-		printBoard(res);
-		
-		param.setDirection(-1);
-		param.setSourceStatePosition(23);
-		param.setDestStatePosition(14);
-		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWAL);
-		res = game.handleGame(res.getData(), param);
-		
-		printBoard(res);
-		
-		param.setDirection(-1);
-		param.setSourceStatePosition(14);
-		param.setDestStatePosition(23);
-		// withdraw move
-		param.setTypeMove(CAPTURING_WITHDRAWAL);
-		res = game.handleGame(res.getData(), param);
-		
-		printBoard(res);
 	}
 
 	@Test
