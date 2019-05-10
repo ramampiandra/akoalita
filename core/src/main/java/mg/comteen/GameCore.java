@@ -133,14 +133,15 @@ public class GameCore implements Game {
 	 * @param index
 	 */
 	public void transformIndexTo2DPosition(int index, int type) {
+		Position position = new Position();
+		int y = index % 9;
+		int x = index / 9;
+		position.setY(y == 0 ? 8:y-1);
+		position.setX(y == 0 ? x-1:x);
 		if (type == 1) {
-			currentPosition = new Position();
-			currentPosition.setY((index % 9) - 1);
-			currentPosition.setX((index / 9));
+			currentPosition = position;
 		} else {
-			nextPosition = new Position();
-			nextPosition.setY((index % 9) - 1);
-			nextPosition.setX((index / 9));
+			nextPosition = position;
 		}
 
 	}

@@ -106,6 +106,14 @@ public class GameTU {
 		
 		printBoard(res);
 		
+		param.setDirection(-1);
+		param.setSourceStatePosition(36);
+		param.setDestStatePosition(35);
+		param.setTypeMove(PAIKA);
+		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
+		
 	}
 
 	@Test
