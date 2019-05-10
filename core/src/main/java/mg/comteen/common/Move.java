@@ -1,18 +1,20 @@
 package mg.comteen.common;
 
-public abstract class Move {
+public class Move {
 
 	public static enum Type {
-		CAPTURING_ADVANCE, CAPTURING_WITHDRAWAL, PAIKA, SACRIFICE
+		CAPTURING_ADVANCE, CAPTURING_WITHDRAWAL, PAIKA
 	}
 
 	protected Type type;
 
-	protected void setTypeMove(int typeMove) {
+	public void setTypeMove(int typeMove) {
 		if (typeMove == 1001) {
 			type = Type.CAPTURING_ADVANCE;
 		} else if (typeMove == 1002) {
 			type = Type.CAPTURING_WITHDRAWAL;
+		} else if(typeMove == 2001) {
+			type = Type.PAIKA;
 		}
 	}
 
@@ -23,7 +25,7 @@ public abstract class Move {
 	 * @param p
 	 * @return
 	 */
-	protected Position getNext(int direction, Position p) {
+	public Position getNext(int direction, Position p) {
 		int yPoint = p.getY();
 		int xPoint = p.getX();
 		int yNextPoint = 0;
@@ -72,7 +74,7 @@ public abstract class Move {
 	 * @param p
 	 * @return
 	 */
-	protected boolean isMoveValid(int direction, Position p) {
+	public boolean isMoveValid(int direction, Position p) {
 		int yPoint = p.getY();
 		int xPoint = p.getX();
 		boolean result = false;
@@ -144,9 +146,20 @@ public abstract class Move {
 			param.setStartProcessPosition(param.getCurrentPosition());
 			//Changing direction
 			param.setDirection(direction);
-		} else {
+		} else { 
+			// No change for CAPTURING_ADVANCE and PAIKA move
 			param.setStartProcessPosition(param.getNextPosition());
 		}
 	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+	
+	
 
 }

@@ -12,11 +12,9 @@ import mg.comteen.common.Result;
 public class GameTU {
 
 	private GameCore game = null;
-	
 	private final int CAPTURING_ADVANCE = 1001;
-	
 	private final int CAPTURING_WITHDRAWAL = 1002;
-
+	private final int PAIKA = 2001;
 	private String states;
 
 	@Before
@@ -96,6 +94,14 @@ public class GameTU {
 		param.setSourceStatePosition(15);
 		param.setDestStatePosition(25);
 		param.setTypeMove(CAPTURING_ADVANCE);
+		res = game.handleGame(res.getData(), param);
+		
+		printBoard(res);
+		
+		param.setDirection(-1);
+		param.setSourceStatePosition(44);
+		param.setDestStatePosition(45);
+		param.setTypeMove(PAIKA);
 		res = game.handleGame(res.getData(), param);
 		
 		printBoard(res);

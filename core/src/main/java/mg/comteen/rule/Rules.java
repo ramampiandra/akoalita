@@ -1,5 +1,6 @@
 package mg.comteen.rule;
 
+import mg.comteen.common.Move;
 import mg.comteen.common.Parameter;
 
 public interface Rules {
@@ -8,6 +9,8 @@ public interface Rules {
 
 	boolean processChange(int[][] board, Parameter param);
 
-	void eliminateAdversary(int[][] board, Parameter param);
+	void captureOpponent(int[][] board, Parameter param);
+	
+	Move getInstanceMove();
 
 }

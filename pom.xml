@@ -24,6 +24,6 @@
   </dependencies>
   <modules>
     <module>core</module>
-    <module>uigame</module>
+    <module>server</module>
   </modules>
 </project>

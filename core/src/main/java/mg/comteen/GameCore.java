@@ -1,6 +1,5 @@
 package mg.comteen;
 
-import mg.comteen.common.Move;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
@@ -8,14 +7,14 @@ import mg.comteen.common.Result;
 import mg.comteen.common.Stone;
 import mg.comteen.exception.FanoronaException;
 import mg.comteen.rule.Rules;
-import mg.comteen.rule.RulesImpl;
+import mg.comteen.rule.RulesCore;
 
 /**
  * This is the game entrypoint
  * 
  * @author ramamj
  */
-public class GameCore extends Move implements Game {
+public class GameCore implements Game {
 
 	private int[][] board = new int[5][9];
 
@@ -24,8 +23,9 @@ public class GameCore extends Move implements Game {
 	private Player[] player = new Player[2];
 	
 	private int lastPlayer = 0;
-
-	private Rules rules = RulesImpl.getInstance();
+	
+	//One to One with Rules
+	private Rules rules = new RulesCore();
 
 	public GameCore() {
 		/* Initialization player ids respectively 1 and 2
@@ -156,7 +156,7 @@ public class GameCore extends Move implements Game {
 		int indexDestination = param.getDestStatePosition();
 		if (direction != -1) {
 			if (currentPosition != null) {
-				nextPosition = getNext(direction, currentPosition);
+				nextPosition = rules.getInstanceMove().getNext(direction, currentPosition);
 			} else {
 				throw new FanoronaException("Invalid move. Current Position undefined");
 			}

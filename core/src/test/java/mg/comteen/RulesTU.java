@@ -10,11 +10,11 @@ import mg.comteen.common.Direction;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
-import mg.comteen.rule.RulesImpl;
+import mg.comteen.rule.RulesCore;
 
 public class RulesTU {
 	
-	private RulesImpl rules = null;
+	private RulesCore rules = null;
 	
 	private int[][] board = {
 			{0,1,1,1,2,1,1,1,1},
@@ -26,7 +26,7 @@ public class RulesTU {
 
 	@Before
 	public void setUp() throws Exception {
-		rules = RulesImpl.getInstance();
+		rules = new RulesCore();
 	}
 
 	@After
@@ -69,7 +69,7 @@ public class RulesTU {
 		param.setDirection(Direction.TOP_RIGHT);
 		param.setNextPosition(nextPosition);
 
-		rules.eliminateAdversary(board, param);
+		rules.captureOpponent(board, param);
 		assertEquals(0, board[2][2]);
 		assertEquals(0, board[1][3]);
 		assertEquals(2, board[0][4]);

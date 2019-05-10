@@ -1,6 +1,7 @@
 package mg.comteen.rule;
 
 import mg.comteen.common.Move;
+import mg.comteen.common.Move.Type;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
@@ -12,18 +13,13 @@ import mg.comteen.exception.FanoronaException;
  * @author ramamj
  *
  */
-public class RulesImpl extends Move implements Rules {
+public class RulesCore implements Rules {
+	
+	//One to one with Move
+	private Move move = new Move();
 
-	private static RulesImpl rulesImpl = null;
-
-	private RulesImpl() {
-	}
-
-	public static synchronized RulesImpl getInstance() {
-		if (rulesImpl == null) {
-			rulesImpl = new RulesImpl();
-		}
-		return rulesImpl;
+	public Move getInstanceMove() {
+		return move;
 	}
 
 	/**
@@ -57,9 +53,17 @@ public class RulesImpl extends Move implements Rules {
 		int x = param.getNextPosition().getX();
 		int y = param.getNextPosition().getY();
 		if (checkIfNextPositionValid(board, param)) {
+			
+			//First move for the piece
 			board[x][y] = board[oldX][oldY];
 			board[oldX][oldY] = 0;
-			eliminateAdversary(board, param);
+			
+			move.setTypeMove(param.getTypeMove());
+			//No capture for PAIKA move
+			if(move.getType() != Type.PAIKA) {
+				captureOpponent(board, param);
+			}
+			
 			// Set last new position valid for current player
 			param.getCurrentPlayer().setLastPosition(param.getCurrentPosition());
 			res = true;
@@ -68,21 +72,21 @@ public class RulesImpl extends Move implements Rules {
 	}
 
 	/**
-	 * The capture is based on direction of the stone and we replace the
-	 * opposite stone by 0 i.e empty
+	 * The capture is based on direction of the piece and we replace the
+	 * Opponent piece by 0 i.e empty
 	 */
-	public void eliminateAdversary(int[][] board, Parameter param) {
-		setTypeMove(param.getTypeMove());
+	public void captureOpponent(int[][] board, Parameter param) {
+		//move.setTypeMove(param.getTypeMove());
 		int x = param.getNextPosition().getX(), y = param.getNextPosition().getY();
 		int player = board[x][y];// Get player Id
 
 		// Init the starting position
-		initMoveHandler(param);
+		move.initMoveHandler(param);
 		int direction = param.getDirection();
-		Position position = getNext(direction, param.getStartProcessPosition());
+		Position position = move.getNext(direction, param.getStartProcessPosition());
 
-		// Change the model board
-		while (isMoveValid(direction, position)) {
+		// Starting ...
+		while (move.isMoveValid(direction, position)) {
 			int item = board[position.getX()][position.getY()];
 			 // For item == 0, you can capture any UNBROKEN line of black pieces in this waa
 			if (item == player || item == 0) {
@@ -91,7 +95,7 @@ public class RulesImpl extends Move implements Rules {
 				// Capture pieces opponent 
 				board[position.getX()][position.getY()] = 0;
 			}
-			position = getNext(direction, position);
+			position = move.getNext(direction, position);
 		}
 	}
 	
