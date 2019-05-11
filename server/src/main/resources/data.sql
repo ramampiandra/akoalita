@@ -1,0 +1,1 @@
+/*insert into game(Id,gameStatus, player_one_id, player_two_id,created) values (18, 'WAITS_FOR_PLAYER', NULL, NULL,NULL);*/
