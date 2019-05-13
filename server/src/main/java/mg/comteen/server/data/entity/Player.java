@@ -23,11 +23,8 @@ public class Player {
 	
 	private String password;
 	
-	@Column(name = "id_game")
-	private Long idGame;
-	
 	@ManyToOne
-	@JoinColumn(name = "id_game", nullable = true,insertable = false, updatable = false)
+	@JoinColumn(name = "id_game", nullable = true)
 	private Game game;
 
 	public Long getId() {
@@ -72,6 +69,5 @@ public class Player {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	
+	}	
 }

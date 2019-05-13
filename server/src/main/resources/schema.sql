@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS player(Id INTEGER NOT NULL,
                      PRIMARY KEY (Id) );
                      
 CREATE TABLE IF NOT EXISTS game(Id INTEGER NOT NULL, 
-                     gameStatus VARCHAR(100) NOT NULL,
+                     game_status VARCHAR(100) NOT NULL,
                      player_one_id INTEGER DEFAULT NULL,
                      player_two_id INTEGER DEFAULT NULL,
                      created DATE,

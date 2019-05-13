@@ -39,6 +39,5 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     	} else {
     		LOG.info("[AKOALITA] Admin user already configured");
     	}
-        
     }
 }

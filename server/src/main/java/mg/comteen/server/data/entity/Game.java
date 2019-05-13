@@ -20,8 +20,8 @@ public class Game {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-    @Enumerated(EnumType.STRING)
-    private GameStatus gameStatus;
+	@Column(name = "game_status", nullable = false)
+    private String gameStatus;
     
     @Column(name = "player_one_id", nullable = true)
     private Long idPlayerOne;
@@ -43,11 +43,11 @@ public class Game {
 		this.id = id;
 	}
 
-	public GameStatus getGameStatus() {
+	public String getGameStatus() {
 		return gameStatus;
 	}
 
-	public void setGameStatus(GameStatus gameStatus) {
+	public void setGameStatus(String gameStatus) {
 		this.gameStatus = gameStatus;
 	}
 

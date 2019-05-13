@@ -28,12 +28,15 @@ public class GameCore implements Game {
 	private Rules rules = new RulesCore();
 
 	public GameCore() {
-		/* Initialization player ids respectively 1 and 2
-		 * In the future, this initialization will be replaced by ID user or
-		 * IP Address User  
-		 */
+		// 1 & 2 are the logic player's IDs 
 		player[0] = new Player(1);
 		player[1] = new Player(2);
+	}
+	
+	public GameCore(long idSys1, long idSys2) {
+		this();
+		player[0].setPhysicIdentity(idSys1);
+		player[1].setPhysicIdentity(idSys2);
 	}
 
 	/**

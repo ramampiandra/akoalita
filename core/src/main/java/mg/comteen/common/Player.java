@@ -7,9 +7,7 @@ public class Player {
 
 	private int id;
 	
-	private String userName;
-	
-	private String email;
+	private long physicIdentity;
 	
 	private boolean isPlayerReady = false;
 
@@ -74,21 +72,12 @@ public class Player {
 		this.lastPosition = lastPosition;
 	}
 
-	public String getUserName() {
-		return userName;
+	public long getPhysicIdentity() {
+		return physicIdentity;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPhysicIdentity(long physicIdentity) {
+		this.physicIdentity = physicIdentity;
 	}
 	
-
 }
