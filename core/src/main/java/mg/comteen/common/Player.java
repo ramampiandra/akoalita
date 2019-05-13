@@ -8,8 +8,6 @@ public class Player {
 	private int id;
 	
 	private long physicIdentity;
-	
-	private boolean isPlayerReady = false;
 
 	private Position lastPosition;
 

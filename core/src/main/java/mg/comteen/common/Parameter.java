@@ -1,6 +1,13 @@
 package mg.comteen.common;
 
-public class Parameter {
+import java.io.Serializable;
+
+public class Parameter implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// Direction of the piece
 	private int direction = -1;
