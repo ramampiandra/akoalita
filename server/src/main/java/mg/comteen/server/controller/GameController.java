@@ -85,7 +85,7 @@ public class GameController {
     			param.setDestStatePosition(parameterDto.getDestination());
     			param.setTypeMove(parameterDto.getTypeMove());
     			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
-    			if(res.isResult()) responseDto.setStatus(false);
+    			if(!res.isResult()) responseDto.setStatus(false);
     			responseDto.setData(res);
     		} else {
     			responseDto.setMessage("Instance or configuration game not found : [" + parameterDto.getIdGame() + "]");
