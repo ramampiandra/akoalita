@@ -23,3 +23,5 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/hsqldb.script.properties
+/hsqldb.script.script

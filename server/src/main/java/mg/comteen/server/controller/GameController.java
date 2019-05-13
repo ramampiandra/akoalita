@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import mg.comteen.GameCore;
+import mg.comteen.common.Parameter;
+import mg.comteen.common.Result;
 import mg.comteen.server.data.dto.ResponseDto;
 import mg.comteen.server.data.entity.Game;
 import mg.comteen.server.service.GameService;
@@ -62,6 +65,26 @@ public class GameController {
 		}
     	return responseDto;
     }
+    @RequestMapping(value = "/move/{idGame}/{states}", method = RequestMethod.POST)
+    public ResponseDto<?> hangleGame(@PathVariable(name = "idGame", value = "0", required = true) long idGame,
+    									@PathVariable(name = "states", value = "0", required = true) String states,
+    									Parameter param) {
+    	ResponseDto<Result<String>> responseDto = new ResponseDto<>();
+    	try { 
+    		GameCore gameCore = (GameCore)httpSession.getAttribute(idGame + "");
+    		if(gameCore != null) {
+    			Result<String> res = gameCore.handleGame(states, param);
+    			responseDto.setData(res);
+    		} else {
+    			responseDto.setMessage("Game not found : " + idGame);
+    		}
+    	} catch (Exception e) {
+			responseDto.setStatus(false);
+			responseDto.setMessage(e.getMessage());
+		}
+    	return responseDto;
+    }
+    
 
 
 }
