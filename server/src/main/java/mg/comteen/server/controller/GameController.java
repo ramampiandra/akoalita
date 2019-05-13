@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -73,17 +74,18 @@ public class GameController {
     	return responseDto;
     }
     @RequestMapping(value = "/move", consumes = "application/json", method = RequestMethod.POST)
-    public ResponseDto<?> hangleGame(ParameterDto parameterDto) {
+    public ResponseDto<?> hangleGame(@RequestBody ParameterDto parameterDto) {
     	ResponseDto<Result<String>> responseDto = new ResponseDto<>();
     	
     	try { 
     		GameCore gameCore = (GameCore)httpSession.getAttribute(parameterDto.getIdGame() + "");
-    		if(gameCore != null && StringUtils.isEmpty(parameterDto.getStateBoard())) {
+    		if(gameCore != null && !StringUtils.isEmpty(parameterDto.getStateBoard())) {
     			Parameter param = new Parameter();
     			param.setSourceStatePosition(parameterDto.getSource());
     			param.setDestStatePosition(parameterDto.getDestination());
     			param.setTypeMove(parameterDto.getTypeMove());
     			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
+    			if(res.isResult()) responseDto.setStatus(false);
     			responseDto.setData(res);
     		} else {
     			responseDto.setMessage("Instance or configuration game not found : [" + parameterDto.getIdGame() + "]");
