@@ -19,12 +19,13 @@ public class GameCore implements Game {
 	private int[][] board = new int[5][9];
 
 	private Position currentPosition, nextPosition;
-
+	
+	// Init the two player when game starts
 	private Player[] player = new Player[2];
 	
 	private int lastPlayer = 0;
 	
-	//One to One with Rules
+	// One to One with Rules
 	private Rules rules = new RulesCore();
 
 	public GameCore() {
@@ -37,6 +38,22 @@ public class GameCore implements Game {
 		this();
 		player[0].setPhysicIdentity(idSys1);
 		player[1].setPhysicIdentity(idSys2);
+	}
+	
+	public GameCore(long idSys1, long idSys2, GameLoading gameLoading) {
+		this(idSys1,idSys2);
+		if(gameLoading != null) {
+			initLoadingGame(gameLoading);
+		}
+	}
+	
+	/**
+	 * Init the game's state from GameLoading object
+	 * @param gameLoading
+	 */
+	private void initLoadingGame(GameLoading gameLoading) {
+		player[0].updateStates(null, gameLoading.getDirectionHasAlreadyDonePlayerOne());
+		player[1].updateStates(null, gameLoading.getDirectionHasAlreadyDonePlayerTwo());
 	}
 
 	/**

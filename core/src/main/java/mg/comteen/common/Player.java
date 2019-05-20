@@ -24,6 +24,11 @@ public class Player {
 		this.lastPosition = null;
 		this.directionHasAlreadyDone = null;
 	}
+	
+	public void updateStates(Position lastPosition, List<Integer> directionHasAlreadyDone) {
+		this.lastPosition = lastPosition;
+		this.directionHasAlreadyDone = directionHasAlreadyDone;
+	}
 
 	public boolean isEqualToLastPosition(Position current) {
 		boolean isEqual = false;
