@@ -12,25 +12,26 @@ public class GameLoading {
 	private String state;
 	
 	// Player's one hystory
-	private List<Integer> directionHasAlreadyDonePlayerOne;
+	private List<Integer> playerOneDirectionHistory;
 	
 	// Player's two hystory
-	private List<Integer> directionHasAlreadyDonePlayerTwo;
+	private List<Integer> playerTwoDirectionHistory;
 
-	public List<Integer> getDirectionHasAlreadyDonePlayerOne() {
-		return directionHasAlreadyDonePlayerOne;
+
+	public List<Integer> getPlayerOneDirectionHistory() {
+		return playerOneDirectionHistory;
 	}
 
-	public void setDirectionHasAlreadyDonePlayerOne(List<Integer> directionHasAlreadyDonePlayerOne) {
-		this.directionHasAlreadyDonePlayerOne = directionHasAlreadyDonePlayerOne;
+	public void setPlayerOneDirectionHistory(List<Integer> playerOneDirectionHistory) {
+		this.playerOneDirectionHistory = playerOneDirectionHistory;
 	}
 
-	public List<Integer> getDirectionHasAlreadyDonePlayerTwo() {
-		return directionHasAlreadyDonePlayerTwo;
+	public List<Integer> getPlayerTwoDirectionHistory() {
+		return playerTwoDirectionHistory;
 	}
 
-	public void setDirectionHasAlreadyDonePlayerTwo(List<Integer> directionHasAlreadyDonePlayerTwo) {
-		this.directionHasAlreadyDonePlayerTwo = directionHasAlreadyDonePlayerTwo;
+	public void setPlayerTwoDirectionHistory(List<Integer> playerTwoDirectionHistory) {
+		this.playerTwoDirectionHistory = playerTwoDirectionHistory;
 	}
 
 	public String getState() {

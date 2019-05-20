@@ -1,6 +1,7 @@
 package mg.comteen.server.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -44,5 +45,13 @@ public class GameService {
 	public GameCore startGame(Game game) {
 		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo());
 		return gameCore;
+	}
+	
+	public Game findGameByIdAndGameStatus(Long Id, String gameStatus) {
+		List<Game> gameList = gameRepository.findGameByIdAndGameStatus(Id, gameStatus);
+		if(gameList != null && gameList.size() > 0) {
+			return gameList.get(0);
+		}
+		return null;
 	}
 }

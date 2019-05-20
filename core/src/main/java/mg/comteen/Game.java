@@ -2,7 +2,6 @@ package mg.comteen;
 
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Result;
-import mg.comteen.exception.FanoronaException;
 
 /**
  * 

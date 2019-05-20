@@ -52,8 +52,8 @@ public class GameCore implements Game {
 	 * @param gameLoading
 	 */
 	private void initLoadingGame(GameLoading gameLoading) {
-		player[0].updateStates(null, gameLoading.getDirectionHasAlreadyDonePlayerOne());
-		player[1].updateStates(null, gameLoading.getDirectionHasAlreadyDonePlayerTwo());
+		player[0].updateStates(null, gameLoading.getPlayerOneDirectionHistory());
+		player[1].updateStates(null, gameLoading.getPlayerTwoDirectionHistory());
 	}
 
 	/**

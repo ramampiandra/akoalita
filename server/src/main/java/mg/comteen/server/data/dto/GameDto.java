@@ -1,5 +1,7 @@
 package mg.comteen.server.data.dto;
 
+import mg.comteen.server.data.entity.Game;
+
 public class GameDto {
 	
 	private long idGame;
@@ -37,6 +39,14 @@ public class GameDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public static GameDto getInstance(Game game) {
+		GameDto gameDto = new GameDto();
+		gameDto.setIdGame(game.getId());
+        gameDto.setIdPlayerOne(game.getIdPlayerOne());
+        gameDto.setStatus(game.getGameStatus());
+        return gameDto;
 	}
 	
 	

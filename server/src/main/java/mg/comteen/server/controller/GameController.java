@@ -19,6 +19,7 @@ import mg.comteen.server.data.dto.GameDto;
 import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
 import mg.comteen.server.data.entity.Game;
+import mg.comteen.server.data.entity.Player;
 import mg.comteen.server.service.GameService;
 import mg.comteen.server.service.PlayerService;
 
@@ -40,16 +41,27 @@ public class GameController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseDto<GameDto> createNewGame() {
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
-    	GameDto gameDto = new GameDto();
-    	
+   
     	try { 
-	    	Game game = gameService.createNewGame();
-	        playerService.updatePlayerFromGame(game);
-	        
-	        gameDto.setIdGame(game.getId());
-	        gameDto.setIdPlayerOne(game.getIdPlayerOne());
-	        gameDto.setStatus(game.getGameStatus());
-	        responseDto.setData(gameDto);
+    		Player player = playerService.findById(playerService.getLoggedUser().getId());
+    		if(player != null) {
+    			Game game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), "IN_PROGRESS");
+    			if(game == null) {
+    				game = gameService.createNewGame();
+        	        playerService.updatePlayerFromGame(game);
+    			} else {
+    				/*Save the game in session if it's the first connection*/
+    				GameCore gameCore = (GameCore)httpSession.getAttribute(game.getId() + "");
+    				if(gameCore == null) {
+    					// TO DO
+    				}
+    				
+    				responseDto.setMessage("You already subscribed in this game " + game.getId());
+    				responseDto.setStatus(false);
+    			}
+    			
+    			responseDto.setData(GameDto.getInstance(game));
+    		}
     	} catch (Exception e) {
 			responseDto.setStatus(false);
 			responseDto.setMessage(e.getMessage());
@@ -61,7 +73,6 @@ public class GameController {
     @RequestMapping(value = "/join/{idGame}", method = RequestMethod.GET)
     public ResponseDto<GameDto> joinGame(@PathVariable("idGame") long idGame) {
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
-    	GameDto gameDto = new GameDto();
     	
     	try { 
     		Game game = gameService.findById(idGame);
@@ -73,10 +84,7 @@ public class GameController {
         		// Start game
         		httpSession.setAttribute(game.getId() + "", gameService.startGame(game));
         		
-        		gameDto.setIdGame(game.getId());
-    	        gameDto.setIdPlayerOne(game.getIdPlayerOne());
-    	        gameDto.setIdPlayerTwo(game.getIdPlayerTwo());
-    	        gameDto.setStatus(game.getGameStatus());
+        		GameDto gameDto = GameDto.getInstance(game);
     	        responseDto.setData(gameDto);
         	}
     	} catch (Exception e) {

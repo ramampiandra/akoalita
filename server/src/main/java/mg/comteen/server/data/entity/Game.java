@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +26,9 @@ public class Game {
     
     @Column(name = "player_two_id", nullable = true)
     private Long idPlayerTwo;
+    
+    @Column(name = "last_states", nullable = true)
+    private String lastState;
 
     @Column(name = "created", nullable = false)
     private Date created;
@@ -82,9 +83,12 @@ public class Game {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
-    
-    
-	
-	
 
+	public String getLastState() {
+		return lastState;
+	}
+
+	public void setLastState(String lastState) {
+		this.lastState = lastState;
+	}
 }
