@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mg.comteen.GameCore;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Result;
+import mg.comteen.server.data.dto.GameDto;
 import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
 import mg.comteen.server.data.entity.Game;
@@ -34,16 +35,21 @@ public class GameController {
 	@Autowired
 	private HttpSession httpSession;
 
-    Logger logger = LoggerFactory.getLogger(GameController.class);
+	Logger logger = LoggerFactory.getLogger(GameController.class);
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseDto<Game> createNewGame() {
-    	ResponseDto<Game> responseDto = new ResponseDto<>();
+    public ResponseDto<GameDto> createNewGame() {
+    	ResponseDto<GameDto> responseDto = new ResponseDto<>();
+    	GameDto gameDto = new GameDto();
     	
     	try { 
 	    	Game game = gameService.createNewGame();
 	        playerService.updatePlayerFromGame(game);
-	        responseDto.setData(game);
+	        
+	        gameDto.setIdGame(game.getId());
+	        gameDto.setIdPlayerOne(game.getIdPlayerOne());
+	        gameDto.setStatus(game.getGameStatus());
+	        responseDto.setData(gameDto);
     	} catch (Exception e) {
 			responseDto.setStatus(false);
 			responseDto.setMessage(e.getMessage());
@@ -53,8 +59,9 @@ public class GameController {
     }
     
     @RequestMapping(value = "/join/{idGame}", method = RequestMethod.GET)
-    public ResponseDto<Game> joinGame(@PathVariable("idGame") long idGame) {
-    	ResponseDto<Game> responseDto = new ResponseDto<>();
+    public ResponseDto<GameDto> joinGame(@PathVariable("idGame") long idGame) {
+    	ResponseDto<GameDto> responseDto = new ResponseDto<>();
+    	GameDto gameDto = new GameDto();
     	
     	try { 
     		Game game = gameService.findById(idGame);
@@ -65,6 +72,12 @@ public class GameController {
         		playerService.updatePlayerFromGame(game);
         		// Start game
         		httpSession.setAttribute(game.getId() + "", gameService.startGame(game));
+        		
+        		gameDto.setIdGame(game.getId());
+    	        gameDto.setIdPlayerOne(game.getIdPlayerOne());
+    	        gameDto.setIdPlayerTwo(game.getIdPlayerTwo());
+    	        gameDto.setStatus(game.getGameStatus());
+    	        responseDto.setData(gameDto);
         	}
     	} catch (Exception e) {
 			responseDto.setStatus(false);
@@ -84,6 +97,7 @@ public class GameController {
     			param.setSourceStatePosition(parameterDto.getSource());
     			param.setDestStatePosition(parameterDto.getDestination());
     			param.setTypeMove(parameterDto.getTypeMove());
+    			
     			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
     			if(!res.isResult()) responseDto.setStatus(false);
     			responseDto.setData(res);

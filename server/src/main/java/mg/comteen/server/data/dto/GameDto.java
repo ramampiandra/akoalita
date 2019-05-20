@@ -5,6 +5,7 @@ public class GameDto {
 	private long idGame;
 	private long idPlayerOne;
 	private long idPlayerTwo;
+	private String status;
 
 	public long getIdPlayerOne() {
 		return idPlayerOne;
@@ -28,6 +29,14 @@ public class GameDto {
 
 	public void setIdPlayerTwo(long idPlayerTwo) {
 		this.idPlayerTwo = idPlayerTwo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
