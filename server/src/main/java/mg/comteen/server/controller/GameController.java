@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mg.comteen.GameCore;
+import mg.comteen.GameLoading;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Result;
 import mg.comteen.server.data.dto.GameDto;
@@ -28,16 +29,16 @@ import mg.comteen.server.service.PlayerService;
 @RequestMapping("/game")
 public class GameController {
 	
-	@Autowired
-	private GameService gameService;
+    @Autowired
+    private GameService gameService;
 	
-	@Autowired
-	private PlayerService playerService;
+    @Autowired
+    private PlayerService playerService;
 	
-	@Autowired
-	private HttpSession httpSession;
+    @Autowired
+    private HttpSession httpSession;
 
-	Logger logger = LoggerFactory.getLogger(GameController.class);
+    Logger logger = LoggerFactory.getLogger(GameController.class);
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseDto<GameDto> createNewGame() {
@@ -65,26 +66,47 @@ public class GameController {
     	return responseDto;
     }
     
+    /**
+     * Join or rejoin
+     * @param idGame
+     * @return
+     */
     @RequestMapping(value = "/join/{idGame}", method = RequestMethod.GET)
     public ResponseDto<GameDto> joinGame(@PathVariable("idGame") long idGame) {
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
     	
-    	try { 
-    		Game game = gameService.findGameByIdAndGameStatus(idGame, GameStatus.WAITS_FOR_PLAYER.getValue());
-        	if(game != null) {
-        		// Update game status
-        		gameService.updateGame(game);
-        		// Update idGame on Player two
-        		playerService.updatePlayerFromGame(game);
-        		// Start game
-        		httpSession.setAttribute(game.getId() + "", gameService.startGame(game));
-        		
-        		GameDto gameDto = GameDto.getInstance(game);
-    	        responseDto.setData(gameDto);
-        	} else {
-        		responseDto.setMessage("Id game not found or game is already in progress or finished ");
-				responseDto.setStatus(false);
-        	}
+    	try {
+    		// Find if player has already an IN PROGRESS game => rejoin method
+    		Game game = gameService.findGameByIdAndIdPlayerOneOrIdPlayerTwo(idGame, playerService.getLoggedUser().getId());
+    		if(game == null) {
+    			game = gameService.findGameByIdAndGameStatus(idGame, GameStatus.WAITS_FOR_PLAYER.getValue());
+            	if(game != null) {
+            		// Update game status
+            		gameService.updateGame(game);
+            		// Update idGame on Player two
+            		playerService.updatePlayerFromGame(game);
+            		// Start game
+            		httpSession.setAttribute(game.getId() + "", gameService.startGame(game));
+            		
+            		GameDto gameDto = GameDto.getInstance(game);
+        	        responseDto.setData(gameDto);
+            	} else {
+            		responseDto.setMessage("Game is already in progress or finished ");
+    				responseDto.setStatus(false);
+            	}
+    		} else {
+    			GameCore gameCore = (GameCore)httpSession.getAttribute(idGame + "");
+    			if(gameCore == null) {
+    				GameLoading gameLoading = new GameLoading();
+    				// Reload game
+            		httpSession.setAttribute(game.getId() + "", gameService.reloadGame(game, gameLoading));
+            		responseDto.setMessage("You rejoined the game " + idGame);
+            		responseDto.setData(GameDto.getInstance(game));
+    			} else {
+    				responseDto.setMessage("You has already joined the game " + idGame);
+    			}
+    		}
+    		
     	} catch (Exception e) {
 			responseDto.setStatus(false);
 			responseDto.setMessage(e.getMessage());
@@ -103,12 +125,19 @@ public class GameController {
     			param.setSourceStatePosition(parameterDto.getSource());
     			param.setDestStatePosition(parameterDto.getDestination());
     			param.setTypeMove(parameterDto.getTypeMove());
+    			param.setPhysicIdentityPlayer(playerService.getLoggedUser().getId());
     			
     			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
-    			if(!res.isResult()) responseDto.setStatus(false);
+    			if(!res.isResult()) {
+    				responseDto.setStatus(false);
+    			} else {
+    				// Update game status
+            		gameService.updateStateGame(parameterDto.getIdGame(), res.getData());
+    			}
     			responseDto.setData(res);
     		} else {
     			responseDto.setMessage("Instance or configuration game not found : [" + parameterDto.getIdGame() + "]");
+    			responseDto.setStatus(false);
     		}
     	} catch (Exception e) {
 			responseDto.setStatus(false);

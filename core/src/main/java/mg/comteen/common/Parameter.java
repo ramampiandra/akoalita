@@ -2,6 +2,8 @@ package mg.comteen.common;
 
 import java.io.Serializable;
 
+import mg.comteen.exception.FanoronaException;
+
 public class Parameter implements Serializable {
 
 	/**
@@ -20,6 +22,9 @@ public class Parameter implements Serializable {
 
 	// Type move
 	private int typeMove = 1;
+	
+	// Current external player id
+	private long physicIdentityPlayer; 
 
 	// Current player
 	private Player currentPlayer;
@@ -86,7 +91,11 @@ public class Parameter implements Serializable {
 	}
 
 	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
+		if(currentPlayer.getPhysicIdentity() == physicIdentityPlayer) {
+			this.currentPlayer = currentPlayer;
+		} else {
+			throw new FanoronaException("It's not possible to move the other player's piece [Physical Identity Not Matching]");
+		}
 	}
 
 	public Position getCurrentPosition() {
@@ -129,6 +138,14 @@ public class Parameter implements Serializable {
 		this.startProcessPosition = startProcessPosition;
 	}
 
+	public long getPhysicIdentityPlayer() {
+		return physicIdentityPlayer;
+	}
+
+	public void setPhysicIdentityPlayer(long physicIdentityPlayer) {
+		this.physicIdentityPlayer = physicIdentityPlayer;
+	}
+	
 	
 
 }

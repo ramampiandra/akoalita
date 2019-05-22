@@ -8,6 +8,7 @@ public class GameDto {
 	private long idPlayerOne;
 	private long idPlayerTwo;
 	private String status;
+	private String state;
 
 	public long getIdPlayerOne() {
 		return idPlayerOne;
@@ -40,12 +41,21 @@ public class GameDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public static GameDto getInstance(Game game) {
 		GameDto gameDto = new GameDto();
 		gameDto.setIdGame(game.getId());
         gameDto.setIdPlayerOne(game.getIdPlayerOne());
+        gameDto.setIdPlayerTwo(game.getIdPlayerTwo());
         gameDto.setStatus(game.getGameStatus());
+        gameDto.setState(game.getLastState());
         return gameDto;
 	}
 	

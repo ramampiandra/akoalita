@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mg.comteen.GameCore;
+import mg.comteen.GameLoading;
+import mg.comteen.exception.FanoronaException;
 import mg.comteen.server.data.entity.Game;
 import mg.comteen.server.repository.GameRepository;
 
@@ -42,13 +44,36 @@ public class GameService {
 		return gameRepository.save(game);
 	}
 	
+	public Game updateStateGame(Long id, String state) {
+		Game game = findById(id);
+		game.setLastState(state);
+		return gameRepository.save(game);
+	}
+	
 	public GameCore startGame(Game game) {
 		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo());
 		return gameCore;
 	}
 	
+	public GameCore reloadGame(Game game, GameLoading gameLoading) {
+		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo(), gameLoading);
+		return gameCore;
+	}
+	
 	public Game findGameByIdAndGameStatus(Long Id, String gameStatus) {
 		List<Game> gameList = gameRepository.findGameByIdAndGameStatus(Id, gameStatus);
+		if(gameList != null && gameList.size() > 0) {
+			return gameList.get(0);
+		}
+		return null;
+	}
+	
+	public Game findGameByIdAndIdPlayerOneOrIdPlayerTwo(Long Id, Long idPlayer) {
+		Game game = findById(Id);
+		if(game == null) {
+			throw new FanoronaException("Game not found");
+		}
+		List<Game> gameList = gameRepository.findGameByIdAndIdPlayerOneOrIdPlayerTwo(Id, idPlayer, idPlayer);
 		if(gameList != null && gameList.size() > 0) {
 			return gameList.get(0);
 		}
