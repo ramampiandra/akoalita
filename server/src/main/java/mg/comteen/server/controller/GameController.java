@@ -19,6 +19,7 @@ import mg.comteen.server.data.dto.GameDto;
 import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
 import mg.comteen.server.data.entity.Game;
+import mg.comteen.server.data.entity.GameStatus;
 import mg.comteen.server.data.entity.Player;
 import mg.comteen.server.service.GameService;
 import mg.comteen.server.service.PlayerService;
@@ -45,17 +46,11 @@ public class GameController {
     	try { 
     		Player player = playerService.findById(playerService.getLoggedUser().getId());
     		if(player != null) {
-    			Game game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), "IN_PROGRESS");
+    			Game game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), GameStatus.IN_PROGRESS.getValue());
     			if(game == null) {
     				game = gameService.createNewGame();
         	        playerService.updatePlayerFromGame(game);
     			} else {
-    				/*Save the game in session if it's the first connection*/
-    				GameCore gameCore = (GameCore)httpSession.getAttribute(game.getId() + "");
-    				if(gameCore == null) {
-    					// TO DO
-    				}
-    				
     				responseDto.setMessage("You already subscribed in this game " + game.getId());
     				responseDto.setStatus(false);
     			}
@@ -75,7 +70,7 @@ public class GameController {
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
     	
     	try { 
-    		Game game = gameService.findById(idGame);
+    		Game game = gameService.findGameByIdAndGameStatus(idGame, GameStatus.WAITS_FOR_PLAYER.getValue());
         	if(game != null) {
         		// Update game status
         		gameService.updateGame(game);
@@ -86,6 +81,9 @@ public class GameController {
         		
         		GameDto gameDto = GameDto.getInstance(game);
     	        responseDto.setData(gameDto);
+        	} else {
+        		responseDto.setMessage("Id game not found or game is already in progress or finished ");
+				responseDto.setStatus(false);
         	}
     	} catch (Exception e) {
 			responseDto.setStatus(false);
