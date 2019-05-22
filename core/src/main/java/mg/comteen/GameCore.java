@@ -55,14 +55,25 @@ public class GameCore implements Game {
 		player[0].updateStates(null, gameLoading.getPlayerOneDirectionHistory());
 		player[1].updateStates(null, gameLoading.getPlayerTwoDirectionHistory());
 	}
-
+	
+	/**
+	 * Validate states string input
+	 * @param states
+	 * @return
+	 */
+	private boolean isStatesValid(String states) {
+		return states != null && !states.isEmpty()
+				   && states.length() == 45
+				       && states.matches("[BEW]{45}");
+	}
+	
 	/**
 	 * Handle request for processing
 	 */
 	public Result<String> handleGame(String states, Parameter param) {
 		Result<String> res = new Result<String>();
 		// Validate parameters
-		if (states != null && !states.isEmpty()) {
+		if (isStatesValid(states)) {
 			// Refresh model board
 			setBoard(states);
 			//Get arrays position form source state position
@@ -88,7 +99,7 @@ public class GameCore implements Game {
 			}
 			res.setData(getStringBoard());
 		} else {
-			res.setMessage("States null or empty");
+			res.setMessage("[FANEXE01]Game state input not valid");
 		}
 		return res;
 	}
@@ -179,7 +190,7 @@ public class GameCore implements Game {
 			if (currentPosition != null) {
 				nextPosition = rules.getInstanceMove().getNext(direction, currentPosition);
 			} else {
-				throw new FanoronaException("Invalid move. Current Position undefined");
+				throw new FanoronaException("[FANEXE02]Invalid move. Current Position undefined");
 			}
 		} else {
 			transformIndexTo2DPosition(indexDestination, 2);
@@ -209,7 +220,7 @@ public class GameCore implements Game {
 				}
 				p = player[index];
 			} else {
-				throw new FanoronaException("Invalid move. Current position is empty");
+				throw new FanoronaException("[FANEXE03]Invalid move. Current position is empty");
 			}
 		}
 		return p;

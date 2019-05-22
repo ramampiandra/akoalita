@@ -131,8 +131,8 @@ public class GameController {
     			if(!res.isResult()) {
     				responseDto.setStatus(false);
     			} else {
-    				// Update game status
-            		gameService.updateStateGame(parameterDto.getIdGame(), res.getData());
+                    // Update game status
+                    gameService.updateStateGame(parameterDto.getIdGame(), res.getData());
     			}
     			responseDto.setData(res);
     		} else {
