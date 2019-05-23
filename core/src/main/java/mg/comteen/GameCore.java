@@ -105,7 +105,9 @@ public class GameCore implements Game {
 	}
 
 	/**
-	 * B = black pion W = white pion
+	 * B = black piece 
+	 * W = white piece
+	 * E = empty piece
 	 * 
 	 * @param states
 	 */

@@ -8,8 +8,12 @@ public class Player {
 	private int id;
 	
 	private long physicIdentity;
-
+	
+	// Used for validation only if player move several times during the same turn (Relay Capturing)
 	private Position lastPosition;
+	
+	// Player can't move more than one unique piece for relay Capturing
+	private Position currentPositionPiece;
 
 	private List<Integer> directionHasAlreadyDone;
 
@@ -23,6 +27,7 @@ public class Player {
 	public void resetStates() {
 		this.lastPosition = null;
 		this.directionHasAlreadyDone = null;
+		this.currentPositionPiece = null;
 	}
 	
 	public void updateStates(Position lastPosition, List<Integer> directionHasAlreadyDone) {
@@ -82,5 +87,16 @@ public class Player {
 	public void setPhysicIdentity(long physicIdentity) {
 		this.physicIdentity = physicIdentity;
 	}
+
+	public Position getCurrentPositionPiece() {
+		return currentPositionPiece;
+	}
+
+	public void setCurrentPositionPiece(Position currentPositionPiece) {
+		this.currentPositionPiece = currentPositionPiece;
+	}
+
+	
+	
 	
 }

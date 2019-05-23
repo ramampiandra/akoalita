@@ -29,6 +29,9 @@ public class RulesCore implements Rules {
 	public boolean checkIfNextPositionValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
 		boolean isValid = false;
+		if(!isTheSamePieceForRelayCapturing(param)) {
+			throw new FanoronaException("Invalid piece move for this relay capturing, use the last piece");
+		}
 		if (isCoordinateValid(board, param)) {
 			if (isPositionValid(param)) {
 				isValid = true;
@@ -66,6 +69,7 @@ public class RulesCore implements Rules {
 			
 			// Set last new position valid for current player
 			param.getCurrentPlayer().setLastPosition(param.getCurrentPosition());
+			param.getCurrentPlayer().setCurrentPositionPiece(param.getNextPosition());
 			res = true;
 		}
 		return res;
@@ -99,6 +103,12 @@ public class RulesCore implements Rules {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param board
+	 * @param param
+	 * @return
+	 */
 	private boolean isCoordinateValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
 		int x = next.getX();
@@ -108,6 +118,25 @@ public class RulesCore implements Rules {
 				&& board[x][y] == 0; // the new (x,y)  must be empty, Pieces can only move onto empty spaces
 	}
 	
+	/**
+	 * Checking the piece id for relay capturing
+	 * @param param
+	 * @return
+	 */
+	private boolean isTheSamePieceForRelayCapturing(Parameter param) {
+		Player player = param.getCurrentPlayer(); // Get the current player
+		Position currentPosition = param.getCurrentPosition();
+		if (player.getCurrentPositionPiece() != null && !player.getCurrentPositionPiece().equals(currentPosition)) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param param
+	 * @return
+	 */
 	private boolean isPositionValid(Parameter param) {
 		Player player = param.getCurrentPlayer(); // Get the current player
 		Position next = param.getNextPosition(); // Get the next position
