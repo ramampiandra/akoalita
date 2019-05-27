@@ -6,8 +6,8 @@ Open library game engine for Fanorona game
 
 See Acknowledgments for further information about the game.<br><br>
 Akoalita have two modules :<br>
-<b>core</b> : it's the game engine, you can use it independently without using the server module. We try to make it as generic as possible to facilitate its integration into other java project.<br>
-<b>server</b> : it's a poc/example module to demonstrate the integration of the core module on real project. 
+* <b>core</b> : it's the game engine, you can use it independently without using the server module. We try to make it as generic as possible to facilitate its integration into other java project.<br>
+* <b>server</b> : it's a poc/example module to demonstrate the integration of the core module on real project. 
 
 ### Prerequisites
 * Java 8
