@@ -227,6 +227,10 @@ public class GameCore implements Game {
 		}
 		return p;
 	}
+	
+	public Rules getInstanceRules() {
+		return rules;
+	}
 
 	public int[][] getBoard() {
 		return board;

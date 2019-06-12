@@ -1,5 +1,8 @@
 package mg.comteen.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Move {
 
 	public static enum Type {
@@ -17,7 +20,25 @@ public class Move {
 			type = Type.PAIKA;
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @param position
+	 * @param direction
+	 * @return
+	 */
+	public List<Position> getChildNodes(Position position, Direction direction) {
+		List<Position> positionList = new ArrayList<Position>();
+		for(int dir : direction.get()) {
+			Position pos = getNext(dir, position);
+			if(isMoveValid(dir, pos)) {
+				positionList.add(pos);
+			}
+		}
+		return positionList;
+	}
+	
+	
 	/**
 	 * Get the next Position
 	 * 

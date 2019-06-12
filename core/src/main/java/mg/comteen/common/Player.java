@@ -9,6 +9,8 @@ public class Player {
 	
 	private long physicIdentity;
 	
+	private TypePlayer typePlayer;
+	
 	// Used for validation only if player move several times during the same turn (Relay Capturing)
 	private Position lastPosition;
 	
@@ -96,7 +98,11 @@ public class Player {
 		this.currentPositionPiece = currentPositionPiece;
 	}
 
-	
-	
-	
+	public TypePlayer getTypePlayer() {
+		return typePlayer;
+	}
+
+	public void setTypePlayer(TypePlayer typePlayer) {
+		this.typePlayer = typePlayer;
+	}
 }
