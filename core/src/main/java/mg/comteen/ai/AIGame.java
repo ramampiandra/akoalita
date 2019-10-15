@@ -2,9 +2,7 @@ package mg.comteen.ai;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Stack;
 
 import mg.comteen.GameCore;
 import mg.comteen.common.Direction;
@@ -50,7 +48,7 @@ public class AIGame {
 		
 		WeightValue udpate() {
 			tree.addAll(arrTemp);
-			arrTemp = new ArrayList<Position>();
+			arrTemp = null;
 			return this;
 		}
 	}
@@ -60,6 +58,14 @@ public class AIGame {
 		return null;
 	}
 	
+	/**
+	 * Min Max algorithm
+	 * @param isCurrentPlayer
+	 * @param depth
+	 * @param game
+	 * @param curr
+	 * @return
+	 */
 	private WeightValue minmax(boolean isCurrentPlayer, int depth, GameCore game, Position curr) {
 		if(depth == 0) {
 			return new WeightValue(100, curr);
