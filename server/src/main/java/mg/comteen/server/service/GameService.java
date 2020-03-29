@@ -56,7 +56,8 @@ public class GameService {
 	}
 	
 	public GameCore reloadGame(Game game, GameLoading gameLoading) {
-		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo(), gameLoading);
+		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo());
+		gameCore.loadGame(gameLoading);
 		return gameCore;
 	}
 	

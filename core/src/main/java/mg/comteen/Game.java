@@ -11,6 +11,8 @@ import mg.comteen.common.Result;
 public interface Game {
 
 	Result<String> handleGame(String states, Parameter param);
+	
+	void loadGame(GameLoading gameLoading);
 
 	default void handleIAGame(String states) { 
 		//TODO MinMax Implementation 

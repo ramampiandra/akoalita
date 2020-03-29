@@ -1,12 +1,17 @@
 package mg.comteen.server.data.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -26,6 +31,9 @@ public class Player {
 	@ManyToOne
 	@JoinColumn(name = "id_game", nullable = true)
 	private Game game;
+	
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "player")
+	private MoveHistory moveHistory;
 
 	public Long getId() {
 		return id;

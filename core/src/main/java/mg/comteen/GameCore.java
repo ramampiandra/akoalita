@@ -40,20 +40,17 @@ public class GameCore implements Game {
 		player[1].setPhysicIdentity(idSys2);
 	}
 	
-	public GameCore(long idSys1, long idSys2, GameLoading gameLoading) {
-		this(idSys1,idSys2);
-		if(gameLoading != null) {
-			initLoadingGame(gameLoading);
-		}
-	}
 	
 	/**
 	 * Init the game's state from GameLoading object
 	 * @param gameLoading
 	 */
-	private void initLoadingGame(GameLoading gameLoading) {
-		player[0].updateStates(null, gameLoading.getPlayerOneDirectionHistory());
-		player[1].updateStates(null, gameLoading.getPlayerTwoDirectionHistory());
+	@Override
+	public void loadGame(GameLoading gameLoading) {
+		if(gameLoading != null) {
+			player[0].updateStates(null, gameLoading.getPlayerOneDirectionHistory());
+			player[1].updateStates(null, gameLoading.getPlayerTwoDirectionHistory());
+		}
 	}
 	
 	/**
