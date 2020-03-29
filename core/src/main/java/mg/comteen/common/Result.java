@@ -2,11 +2,13 @@ package mg.comteen.common;
 
 public class Result<T> {
 
-	T data;
+	private T data;
 
-	boolean result = false;
+	private boolean result = false;
+	
+	int lastDirection = 0;
 
-	String message = "Ok";
+	private String message = "Ok";
 
 	// 1 game over , player "1" win
 	// 2 game over, player "2" win
@@ -44,5 +46,14 @@ public class Result<T> {
 	public void setStatut(int statut) {
 		this.statut = statut;
 	}
+
+	public int getLastDirection() {
+		return lastDirection;
+	}
+
+	public void setLastDirection(int lastDirection) {
+		this.lastDirection = lastDirection;
+	}
+	
 
 }

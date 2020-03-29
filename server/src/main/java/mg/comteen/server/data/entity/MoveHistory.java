@@ -23,8 +23,11 @@ public class MoveHistory {
 	@Column(name = "direction_history", nullable = false)
 	private String directionHistory;
 	
+	@Column(name="player_id")
+	private long playerId;
+	
 	@OneToOne
-	@JoinColumn(name = "player_id", nullable = false)
+	@JoinColumn(name = "player_id", insertable = false, updatable = false)
 	private Player player;
 
 	public Long getId() {
@@ -57,6 +60,14 @@ public class MoveHistory {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public long getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
 	}
 	
 	

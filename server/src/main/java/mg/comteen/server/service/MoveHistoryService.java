@@ -15,8 +15,13 @@ public class MoveHistoryService {
 	@Autowired
 	private MoveHistoryRepository moveHistoryRepository;
 	
-	public MoveHistory findById(long id) {
-		return moveHistoryRepository.findById(id).get();
+	public MoveHistory findByPlayerId(long id) {
+		return moveHistoryRepository.findByPlayerId(id)
+									.orElseGet(MoveHistory::new);
+	}
+	
+	public void save(MoveHistory moveHistory) {
+		moveHistoryRepository.save(moveHistory);
 	}
 
 }

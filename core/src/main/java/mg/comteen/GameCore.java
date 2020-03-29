@@ -95,6 +95,7 @@ public class GameCore implements Game {
 				res.setMessage(ex.getMessage());
 			}
 			res.setData(getStringBoard());
+			res.setLastDirection(param.getDirection());
 		} else {
 			res.setMessage("[FANEXE01]Game state input not valid");
 		}

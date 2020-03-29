@@ -22,8 +22,10 @@ import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
 import mg.comteen.server.data.entity.Game;
 import mg.comteen.server.data.entity.GameStatus;
+import mg.comteen.server.data.entity.MoveHistory;
 import mg.comteen.server.data.entity.Player;
 import mg.comteen.server.service.GameService;
+import mg.comteen.server.service.MoveHistoryService;
 import mg.comteen.server.service.PlayerService;
 
 @RestController
@@ -35,6 +37,9 @@ public class GameController {
 	
     @Autowired
     private PlayerService playerService;
+    
+    @Autowired
+    private MoveHistoryService moveHistoryService;
 	
     @Autowired
     private HttpSession httpSession;
@@ -135,6 +140,16 @@ public class GameController {
     			} else {
                     // Update game status
                     gameService.updateStateGame(parameterDto.getIdGame(), res.getData());
+                    
+                    //Update MoveHistory
+                    MoveHistory moveHistory = moveHistoryService.findByPlayerId(playerService.getLoggedUser().getId());
+                    if(moveHistory.getId() == null) {
+                    	moveHistory.setPlayer(playerService.getLoggedUser());
+                    	moveHistory.setDirectionHistory("");
+                    }
+                	moveHistory.setLastPosition(parameterDto.getDestination());
+                	moveHistory.setDirectionHistory(moveHistory.getDirectionHistory() + res.getLastDirection() + "#");
+                	moveHistoryService.save(moveHistory);
     			}
     			responseDto.setData(res);
     		} else {
