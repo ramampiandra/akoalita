@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "972115ed-dd35-4702-9dd2-c4705ece7ffb",
+		"name": "Akoalita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:5050/game/move",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idgame\":36,\n\t\"source\":32,\n\t\"destination\":31,\n\t\"typemove\":1001,\n\t\"board\":\"BBBBBBEEBBBBBEEEEBBWBEWEEEWWWWEBEEWWWWEWEWEEE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/game/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/move",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idgame\":36,\n\t\"source\":32,\n\t\"destination\":31,\n\t\"typemove\":1001,\n\t\"board\":\"BBBBBBEEBBBBBEEEEBBWBEWEEEWWWWEBEEWWWWEWEWEEE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/game/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/move",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idgame\":36,\n\t\"source\":32,\n\t\"destination\":31,\n\t\"typemove\":1001,\n\t\"board\":\"BBBBBBEEBBBBBEEEEBBWBEWEEEWWWWEBEEWWWWEWEWEEE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/game/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/join/36",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/game/join/36",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"join",
+						"36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/move",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idgame\":36,\n\t\"source\":32,\n\t\"destination\":31,\n\t\"typemove\":1001,\n\t\"board\":\"BBBBBBEEBBBBBEEEEBBWBEWEEEWWWWEBEEWWWWEWEWEEE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/game/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/move",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idgame\":36,\n\t\"source\":32,\n\t\"destination\":31,\n\t\"typemove\":1001,\n\t\"board\":\"BBBBBBEEBBBBBEEEEBBWBEWEEEWWWWEBEEWWWWEWEWEEE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/game/move",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"move"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/game/join/36",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/game/join/36",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"game",
+						"join",
+						"36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:5050/join/36",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/join/36",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"join",
+						"36"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
