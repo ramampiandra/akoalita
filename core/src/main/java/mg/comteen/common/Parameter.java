@@ -58,21 +58,28 @@ public class Parameter implements Serializable {
 			int yPoint = currentPosition.getY();
 			int xPoint = currentPosition.getX();
 
-			if ((yNextPoint == yPoint - 1) && (xNextPoint == xPoint - 1)) {
+			if ((yNextPoint == yPoint - 1) 
+					&& (xNextPoint == xPoint - 1)) {
 				direction = Direction.TOP_LEFT;
-			} else if ((yNextPoint == yPoint) && (xNextPoint == xPoint - 1)) {
+			} else if ((yNextPoint == yPoint) 
+					&& (xNextPoint == xPoint - 1)) {
 				direction = Direction.TOP_MIDDLE;
-			} else if ((yNextPoint == yPoint + 1) && (xNextPoint == xPoint - 1)) {
+			} else if ((yNextPoint == yPoint + 1) 
+					&& (xNextPoint == xPoint - 1)) {
 				direction = Direction.TOP_RIGHT;
-			} else if ((yNextPoint == yPoint - 1) && (xNextPoint == xPoint)) {
+			} else if ((yNextPoint == yPoint - 1) 
+					&& (xNextPoint == xPoint)) {
 				direction = Direction.MIDDLE_LEFT;
-			} else if ((yNextPoint == yPoint + 1) && (xNextPoint == xPoint)) {
+			} else if ((yNextPoint == yPoint + 1) 
+					&& (xNextPoint == xPoint)) {
 				direction = Direction.MIDDLE_RIGHT;
-			} else if ((yNextPoint == yPoint - 1) && (xNextPoint == xPoint + 1)) {
+			} else if ((yNextPoint == yPoint - 1) 
+					&& (xNextPoint == xPoint + 1)) {
 				direction = Direction.BOTTOM_LEFT;
 			} else if ((yNextPoint == yPoint) && (xNextPoint == xPoint + 1)) {
 				direction = Direction.BOTTOM_MIDDLE;
-			} else if ((yNextPoint == yPoint + 1) && (xNextPoint == xPoint + 1)) {
+			} else if ((yNextPoint == yPoint + 1) 
+					&& (xNextPoint == xPoint + 1)) {
 				direction = Direction.BOTTOM_RIGHT;
 			}
 		}

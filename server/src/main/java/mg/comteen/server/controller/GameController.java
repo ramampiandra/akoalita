@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import mg.comteen.GameCore;
 import mg.comteen.GameLoading;
 import mg.comteen.common.Parameter;
@@ -127,6 +128,7 @@ public class GameController {
     			param.setTypeMove(parameterDto.getTypeMove());
     			param.setPhysicIdentityPlayer(playerService.getLoggedUser().getId());
     			
+    			//Call akoalita core game library
     			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
     			if(!res.isResult()) {
     				responseDto.setStatus(false);

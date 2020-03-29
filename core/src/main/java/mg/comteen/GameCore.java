@@ -20,7 +20,7 @@ public class GameCore implements Game {
 
 	private Position currentPosition, nextPosition;
 	
-	// Init the two player when game starts
+	// Initialize the two players when game starts
 	private Player[] player = new Player[2];
 	
 	private int lastPlayer = 0;
@@ -68,7 +68,7 @@ public class GameCore implements Game {
 	}
 	
 	/**
-	 * Handle request for processing
+	 * This is the dispatch handler, which process the game's logic
 	 */
 	public Result<String> handleGame(String states, Parameter param) {
 		Result<String> res = new Result<String>();
@@ -84,7 +84,7 @@ public class GameCore implements Game {
 			
 			// Processing
 			try {
-				// Begin processing
+				//Begin processing
 				//Set the current player from source and position
 				//Throw runtime exception if current position is empty
 				param.setCurrentPlayer(getCurrentPlayer());

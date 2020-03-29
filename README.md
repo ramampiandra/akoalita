@@ -10,8 +10,8 @@ Akoalita have two modules :<br>
 * <b>server</b> : it's a poc/example module to illustrate the integration of the core module in a real project. 
 
 ### Prerequisites
-* Java 8 (Amazon Corretto 8)
-* Maven 3
+* Java 11 (Amazon Corretto 11)
+* Maven 3.6
 
 ## License
 
