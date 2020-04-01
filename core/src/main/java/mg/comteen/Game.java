@@ -1,7 +1,7 @@
 package mg.comteen;
 
 import mg.comteen.common.Parameter;
-import mg.comteen.common.Result;
+import mg.comteen.common.GameState;
 
 /**
  * 
@@ -10,7 +10,7 @@ import mg.comteen.common.Result;
  */
 public interface Game {
 
-	Result<String> handleGame(String states, Parameter param);
+	GameState executeGameEngine(String states, Parameter param);
 	
 	void loadGame(GameLoading gameLoading);
 

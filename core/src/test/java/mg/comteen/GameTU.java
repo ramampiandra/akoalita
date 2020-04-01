@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mg.comteen.common.Parameter;
-import mg.comteen.common.Result;
+import mg.comteen.common.GameState;
 
 public class GameTU {
 
@@ -68,7 +68,7 @@ public class GameTU {
 		// withdraw move
 		param.setTypeMove(CAPTURING_ADVANCE);
 		// 1 Means Advance
-		Result<String> res = game.handleGame(states, param);
+		GameState res = game.executeGameEngine(states, param);
 		
 		printBoard(res);
 		
@@ -78,7 +78,7 @@ public class GameTU {
 		param.setSourceStatePosition(16);
 		param.setDestStatePosition(07);
 		param.setTypeMove(CAPTURING_WITHDRAWAL);
-		res = game.handleGame(res.getData(), param);
+		res = game.executeGameEngine(res.getState(), param);
 		
 		printBoard(res);
 		
@@ -86,7 +86,7 @@ public class GameTU {
 		param.setSourceStatePosition(07);
 		param.setDestStatePosition(15);
 		param.setTypeMove(CAPTURING_ADVANCE);
-		res = game.handleGame(res.getData(), param);
+		res = game.executeGameEngine(res.getState(), param);
 		
 		printBoard(res);
 		
@@ -94,7 +94,7 @@ public class GameTU {
 		param.setSourceStatePosition(15);
 		param.setDestStatePosition(25);
 		param.setTypeMove(CAPTURING_ADVANCE);
-		res = game.handleGame(res.getData(), param);
+		res = game.executeGameEngine(res.getState(), param);
 		
 		printBoard(res);
 		
@@ -102,7 +102,7 @@ public class GameTU {
 		param.setSourceStatePosition(44);
 		param.setDestStatePosition(45);
 		param.setTypeMove(PAIKA);
-		res = game.handleGame(res.getData(), param);
+		res = game.executeGameEngine(res.getState(), param);
 		
 		printBoard(res);
 		
@@ -110,7 +110,7 @@ public class GameTU {
 		param.setSourceStatePosition(36);
 		param.setDestStatePosition(35);
 		param.setTypeMove(PAIKA);
-		res = game.handleGame(res.getData(), param);
+		res = game.executeGameEngine(res.getState(), param);
 		
 		printBoard(res);
 		
@@ -145,13 +145,13 @@ public class GameTU {
 		assertEquals(1, y);
 	}
 
-	private void printBoard(Result<String> res) {
+	private void printBoard(GameState res) {
 		if(res.isResult()) {
-			System.out.println(res.getData().substring(0, 9));
-			System.out.println(res.getData().substring(9, 18));
-			System.out.println(res.getData().substring(18, 27));
-			System.out.println(res.getData().substring(27, 36));
-			System.out.println(res.getData().substring(36, 45));
+			System.out.println(res.getState().substring(0, 9));
+			System.out.println(res.getState().substring(9, 18));
+			System.out.println(res.getState().substring(18, 27));
+			System.out.println(res.getState().substring(27, 36));
+			System.out.println(res.getState().substring(36, 45));
 			System.out.print("\n");
 		} else {
 			System.out.println(res.getMessage());

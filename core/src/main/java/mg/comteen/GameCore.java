@@ -3,7 +3,7 @@ package mg.comteen;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
-import mg.comteen.common.Result;
+import mg.comteen.common.GameState;
 import mg.comteen.common.Stone;
 import mg.comteen.exception.FanoronaException;
 import mg.comteen.rule.Rules;
@@ -30,8 +30,8 @@ public class GameCore implements Game {
 
 	public GameCore() {
 		// 1 & 2 are the logic player's IDs 
-		player[0] = new Player(1);
-		player[1] = new Player(2);
+		player[0] = new Player(1, Stone.BLACK);
+		player[1] = new Player(2, Stone.WHITE);
 	}
 	
 	public GameCore(long idSys1, long idSys2) {
@@ -67,8 +67,8 @@ public class GameCore implements Game {
 	/**
 	 * This is the dispatch handler, which process the game's logic
 	 */
-	public Result<String> handleGame(String states, Parameter param) {
-		Result<String> res = new Result<String>();
+	public GameState executeGameEngine(String states, Parameter param) {
+		GameState res = new GameState();
 		// Validate parameters
 		if (isStatesValid(states)) {
 			// Refresh model board
@@ -94,7 +94,7 @@ public class GameCore implements Game {
 			} catch (Exception ex) {
 				res.setMessage(ex.getMessage());
 			}
-			res.setData(getStringBoard());
+			res.setState(getStringBoard());
 			res.setLastDirection(param.getDirection());
 		} else {
 			res.setMessage("[FANEXE01]Game state input not valid");

@@ -16,7 +16,7 @@ import io.swagger.annotations.Api;
 import mg.comteen.GameCore;
 import mg.comteen.GameLoading;
 import mg.comteen.common.Parameter;
-import mg.comteen.common.Result;
+import mg.comteen.common.GameState;
 import mg.comteen.server.data.dto.GameDto;
 import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
@@ -122,7 +122,7 @@ public class GameController {
     }
     @RequestMapping(value = "/move", consumes = "application/json", method = RequestMethod.POST)
     public ResponseDto<?> hangleGame(@RequestBody ParameterDto parameterDto) {
-    	ResponseDto<Result<String>> responseDto = new ResponseDto<>();
+    	ResponseDto<GameState> responseDto = new ResponseDto<>();
     	
     	try { 
     		GameCore gameCore = (GameCore)httpSession.getAttribute(parameterDto.getIdGame() + "");
@@ -134,12 +134,12 @@ public class GameController {
     			param.setPhysicIdentityPlayer(playerService.getLoggedUser().getId());
     			
     			//Call akoalita core game library
-    			Result<String> res = gameCore.handleGame(parameterDto.getStateBoard(), param);
+    			GameState res = gameCore.executeGameEngine(parameterDto.getStateBoard(), param);
     			if(!res.isResult()) {
     				responseDto.setStatus(false);
     			} else {
                     // Update game status
-                    gameService.updateStateGame(parameterDto.getIdGame(), res.getData());
+                    gameService.updateStateGame(parameterDto.getIdGame(), res.getState());
                     
                     //Update MoveHistory
                     MoveHistory moveHistory = moveHistoryService.findByPlayerId(playerService.getLoggedUser().getId());

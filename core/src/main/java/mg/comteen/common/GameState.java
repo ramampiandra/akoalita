@@ -1,27 +1,26 @@
 package mg.comteen.common;
 
-public class Result<T> {
+import java.io.Serializable;
 
-	private T data;
+public class GameState implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String state;
 
 	private boolean result = false;
 	
-	int lastDirection = 0;
+	private int lastDirection = 0;
 
 	private String message = "Ok";
 
 	// 1 game over , player "1" win
 	// 2 game over, player "2" win
 	// 0 processing
-	int statut = 0;
-
-	public T getData() {
-		return data;
-	}
-
-	public void setData(T data) {
-		this.data = data;
-	}
+	private int statut = 0;
 
 	public boolean isResult() {
 		return result;
@@ -54,6 +53,15 @@ public class Result<T> {
 	public void setLastDirection(int lastDirection) {
 		this.lastDirection = lastDirection;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 	
 
 }

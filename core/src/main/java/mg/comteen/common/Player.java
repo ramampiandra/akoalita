@@ -7,6 +7,8 @@ public class Player {
 
 	private int id;
 	
+	private char stoneColor;
+	
 	private long physicIdentity;
 	
 	private TypePlayer typePlayer;
@@ -21,9 +23,13 @@ public class Player {
 
 	public Player() {
 	}
-
+	
 	public Player(int id) {
 		this.id = id;
+	}
+	public Player(int id, char stoneColor) {
+		this.id = id;
+		this.stoneColor = stoneColor;
 	}
 	
 	public void resetStates() {
@@ -105,4 +111,13 @@ public class Player {
 	public void setTypePlayer(TypePlayer typePlayer) {
 		this.typePlayer = typePlayer;
 	}
+
+	public char getStoneColor() {
+		return stoneColor;
+	}
+
+	public void setStoneColor(char stoneColor) {
+		this.stoneColor = stoneColor;
+	}
+	
 }
