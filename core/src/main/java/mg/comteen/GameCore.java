@@ -3,6 +3,7 @@ package mg.comteen;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
+import mg.comteen.common.PositionValidator;
 import mg.comteen.common.GameState;
 import mg.comteen.common.Stone;
 import mg.comteen.exception.FanoronaException;
@@ -21,17 +22,21 @@ public class GameCore implements Game {
 	private Position currentPosition, nextPosition;
 	
 	// Initialize the two players when game starts
-	private Player[] player = new Player[2];
+	private Player[] player;;
 	
 	private int lastPlayer = 0;
 	
 	// One to One with Rules
-	private Rules rules = new RulesCore();
+	private Rules rules;
 
 	public GameCore() {
-		// 1 & 2 are the logic player's IDs 
+		// 1 & 2 are the logic player's IDs
+		player = new Player[2];
 		player[0] = new Player(1, Stone.BLACK);
 		player[1] = new Player(2, Stone.WHITE);
+		
+		rules = new RulesCore();
+		PositionValidator.getPositionValidatorMap().get(1);
 	}
 	
 	public GameCore(long idSys1, long idSys2) {

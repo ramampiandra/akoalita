@@ -1,10 +1,13 @@
 package mg.comteen.rule;
 
+import java.util.List;
+
 import mg.comteen.common.Move;
 import mg.comteen.common.Move.Type;
 import mg.comteen.common.Parameter;
 import mg.comteen.common.Player;
 import mg.comteen.common.Position;
+import mg.comteen.common.PositionValidator;
 import mg.comteen.exception.FanoronaException;
 
 /**
@@ -21,27 +24,30 @@ public class RulesCore implements Rules {
 	public Move getInstanceMove() {
 		return move;
 	}
-
 	/**
 	 * Check if the next position is valid Next stone empty, axis (x, y) is not
 	 * out of range
 	 */
 	public boolean checkIfNextPositionValid(int[][] board, Parameter param) {
 		Position next = param.getNextPosition();
-		boolean isValid = false;
+
 		if(!isTheSamePieceForRelayCapturing(param)) {
 			throw new FanoronaException("Invalid piece move for this relay capturing, use the last piece");
 		}
-		if (isCoordinateValid(board, param)) {
-			if (isPositionValid(param)) {
-				isValid = true;
-			} else {
-				throw new FanoronaException("Invalid move destination : " + next);
-			}
-		} else {
+		
+		if (!isCoordinateValid(board, param)) {
 			throw new FanoronaException("Position out of range or destination position is not empty : " + next);
 		}
-		return isValid;
+		
+		if (!isPositionValid(param)) {
+			throw new FanoronaException("Invalid move destination : " + next);
+		}
+		
+		if(!isDestinationAllowed(param)) {
+			throw new FanoronaException("This destination " + param.getDestStatePosition() + "is not allowed from the source point, can't move to this point");
+		}
+		
+		return true;
 	}
 
 	/**
@@ -113,6 +119,7 @@ public class RulesCore implements Rules {
 		Position next = param.getNextPosition();
 		int x = next.getX();
 		int y = next.getY();
+		
 		return  (x >= 0 && x <= 4) // x (row) must be between 0 and 4
 				&& (y >= 0 && y <= 8) // y (column) must be between 0 and 8
 				&& board[x][y] == 0; // the new (x,y)  must be empty, Pieces can only move onto empty spaces
@@ -126,22 +133,42 @@ public class RulesCore implements Rules {
 	private boolean isTheSamePieceForRelayCapturing(Parameter param) {
 		Player player = param.getCurrentPlayer(); // Get the current player
 		Position currentPosition = param.getCurrentPosition();
-		if (player.getCurrentPositionPiece() != null && !player.getCurrentPositionPiece().equals(currentPosition)) {
+		
+		if (player.getCurrentPositionPiece() != null 
+				&& !player.getCurrentPositionPiece().equals(currentPosition)) {
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * 
+	 * Check last position and last direction
 	 * @param param
 	 * @return
 	 */
 	private boolean isPositionValid(Parameter param) {
 		Player player = param.getCurrentPlayer(); // Get the current player
 		Position next = param.getNextPosition(); // Get the next position
+		
 		return !player.isEqualToLastPosition(next) // Player can't move on the direct previous position 
 				&& player.isValidDirection(param.getDirection()); // The piece can't make same direction during a relay capture
+	}
+	
+	/**
+	 * Check is destination is allowed
+	 * @param param
+	 * @return
+	 */
+	private boolean isDestinationAllowed(Parameter param) {
+		int sourcePosition = param.getSourceStatePosition();
+	    int destPosition = param.getDestStatePosition();
+	    boolean isValid = false;
+	    
+	    List<Integer> adjacentsList = PositionValidator.getPositionValidatorMap().get(sourcePosition);
+	    if(adjacentsList != null && !adjacentsList.isEmpty()) {
+	    	isValid =  adjacentsList.contains(destPosition);
+	    }
+	    return isValid;
 	}
 
 }

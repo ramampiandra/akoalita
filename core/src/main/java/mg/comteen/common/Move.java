@@ -89,7 +89,7 @@ public class Move {
 	}
 
 	/**
-	 * Get the next Position
+	 * Get and validate the next Position by using the direction
 	 * 
 	 * @param direction
 	 * @param p

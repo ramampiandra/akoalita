@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
 import mg.comteen.GameCore;
 import mg.comteen.GameLoading;
 import mg.comteen.common.Parameter;
@@ -144,7 +143,7 @@ public class GameController {
                     //Update MoveHistory
                     MoveHistory moveHistory = moveHistoryService.findByPlayerId(playerService.getLoggedUser().getId());
                     if(moveHistory.getId() == null) {
-                    	moveHistory.setPlayer(playerService.getLoggedUser());
+                    	moveHistory.setPlayerId(playerService.getLoggedUser().getId());
                     	moveHistory.setDirectionHistory("");
                     }
                 	moveHistory.setLastPosition(parameterDto.getDestination());
