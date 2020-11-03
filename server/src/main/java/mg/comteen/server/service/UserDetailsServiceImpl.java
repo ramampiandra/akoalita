@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import mg.comteen.jpa.entity.PlayerEntity;
 import mg.comteen.server.config.UserPrincipal;
-import mg.comteen.server.data.entity.Player;
 import mg.comteen.server.repository.PlayerRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Username cannot be empty");
         }
 
-        Player player = playerRepository.findOneByUserName(username);
+        PlayerEntity player = playerRepository.findOneByUserName(username);
         if (player == null) {
             throw new UsernameNotFoundException("Player " + username + " doesn't exists");
         }

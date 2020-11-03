@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import com.google.common.collect.ImmutableSet;
 
-import mg.comteen.server.data.entity.Player;
+import mg.comteen.jpa.entity.PlayerEntity;
 
 public class UserPrincipal extends User {
 
@@ -14,7 +14,7 @@ public class UserPrincipal extends User {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public UserPrincipal(Player player) {
+	public UserPrincipal(PlayerEntity player) {
 		super(player.getUserName(),
               player.getPassword(),
               true,

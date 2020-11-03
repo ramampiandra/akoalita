@@ -1,6 +1,6 @@
 package mg.comteen.server.data.dto;
 
-import mg.comteen.server.data.entity.Game;
+import mg.comteen.jpa.entity.GameEntity;
 
 public class GameDto {
 	
@@ -49,7 +49,7 @@ public class GameDto {
 		this.state = state;
 	}
 
-	public static GameDto getInstance(Game game) {
+	public static GameDto getInstance(GameEntity game) {
 		GameDto gameDto = new GameDto();
 		gameDto.setIdGame(game.getId());
         gameDto.setIdPlayerOne(game.getIdPlayerOne());

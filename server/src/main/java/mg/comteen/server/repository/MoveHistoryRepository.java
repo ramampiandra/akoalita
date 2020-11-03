@@ -5,11 +5,11 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import mg.comteen.server.data.entity.MoveHistory;
+import mg.comteen.jpa.entity.MoveHistoryEntity;
 
 @Repository
-public interface MoveHistoryRepository extends CrudRepository<MoveHistory, Long> {
+public interface MoveHistoryRepository extends CrudRepository<MoveHistoryEntity, Long> {
 	
-	Optional<MoveHistory> findByPlayerId(Long playerId);
+	Optional<MoveHistoryEntity> findByPlayerId(Long playerId);
 
 }

@@ -2,6 +2,7 @@ package mg.comteen.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
+@EntityScan(basePackages = {"mg.comteen.jpa.entity"})
 public class ServerApplication {
 	
 	private static final String CONTROLLER_PACKAGE = "mg.comteen.server.controller";

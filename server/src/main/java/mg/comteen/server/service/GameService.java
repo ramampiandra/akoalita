@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import mg.comteen.GameCore;
 import mg.comteen.GameLoading;
 import mg.comteen.exception.FanoronaException;
-import mg.comteen.server.data.entity.Game;
+import mg.comteen.jpa.entity.GameEntity;
 import mg.comteen.server.repository.GameRepository;
 
 @Service
@@ -24,9 +24,9 @@ public class GameService {
 	@Autowired
 	private PlayerService playerService;
 	
-	public Game createNewGame() {
+	public GameEntity createNewGame() {
 		//Create game
-        Game game = new Game();
+		GameEntity game = new GameEntity();
         game.setCreated(new Date());
         game.setIdPlayerOne(playerService.getLoggedUser().getId());
         game.setGameStatus("WAITS_FOR_PLAYER");
@@ -34,47 +34,47 @@ public class GameService {
         return game;
     }
 	
-	public Game findById(long id) {
+	public GameEntity findById(long id) {
 		return gameRepository.findById(id).get();
 	}
 	
-	public Game updateGame(Game game) {
+	public GameEntity updateGame(GameEntity game) {
 		game.setIdPlayerTwo(playerService.getLoggedUser().getId());
 		game.setGameStatus("IN_PROGRESS");
 		return gameRepository.save(game);
 	}
 	
-	public Game updateStateGame(Long id, String state) {
-		Game game = findById(id);
+	public GameEntity updateStateGame(Long id, String state) {
+		GameEntity game = findById(id);
 		game.setLastState(state);
 		return gameRepository.save(game);
 	}
 	
-	public GameCore startGame(Game game) {
+	public GameCore startGame(GameEntity game) {
 		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo());
 		return gameCore;
 	}
 	
-	public GameCore reloadGame(Game game, GameLoading gameLoading) {
+	public GameCore reloadGame(GameEntity game, GameLoading gameLoading) {
 		GameCore gameCore = new GameCore(game.getIdPlayerOne(), game.getIdPlayerTwo());
 		gameCore.loadGame(gameLoading);
 		return gameCore;
 	}
 	
-	public Game findGameByIdAndGameStatus(Long Id, String gameStatus) {
-		List<Game> gameList = gameRepository.findGameByIdAndGameStatus(Id, gameStatus);
+	public GameEntity findGameByIdAndGameStatus(Long Id, String gameStatus) {
+		List<GameEntity> gameList = gameRepository.findGameByIdAndGameStatus(Id, gameStatus);
 		if(gameList != null && gameList.size() > 0) {
 			return gameList.get(0);
 		}
 		return null;
 	}
 	
-	public Game findGameByIdAndIdPlayerOneOrIdPlayerTwo(Long Id, Long idPlayer) {
-		Game game = findById(Id);
+	public GameEntity findGameByIdAndIdPlayerOneOrIdPlayerTwo(Long Id, Long idPlayer) {
+		GameEntity game = findById(Id);
 		if(game == null) {
 			throw new FanoronaException("Game not found");
 		}
-		List<Game> gameList = gameRepository.findGameByIdAndIdPlayerOneOrIdPlayerTwo(Id, idPlayer, idPlayer);
+		List<GameEntity> gameList = gameRepository.findGameByIdAndIdPlayerOneOrIdPlayerTwo(Id, idPlayer, idPlayer);
 		if(gameList != null && gameList.size() > 0) {
 			return gameList.get(0);
 		}

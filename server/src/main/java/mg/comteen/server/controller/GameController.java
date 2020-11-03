@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import mg.comteen.GameCore;
 import mg.comteen.GameLoading;
 import mg.comteen.common.Parameter;
+import mg.comteen.jpa.entity.GameEntity;
+import mg.comteen.jpa.entity.GameStatus;
+import mg.comteen.jpa.entity.MoveHistoryEntity;
+import mg.comteen.jpa.entity.PlayerEntity;
 import mg.comteen.common.GameState;
 import mg.comteen.server.data.dto.GameDto;
 import mg.comteen.server.data.dto.ParameterDto;
 import mg.comteen.server.data.dto.ResponseDto;
-import mg.comteen.server.data.entity.Game;
-import mg.comteen.server.data.entity.GameStatus;
-import mg.comteen.server.data.entity.MoveHistory;
-import mg.comteen.server.data.entity.Player;
 import mg.comteen.server.service.GameService;
 import mg.comteen.server.service.MoveHistoryService;
 import mg.comteen.server.service.PlayerService;
@@ -50,9 +50,9 @@ public class GameController {
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
    
     	try { 
-    		Player player = playerService.findById(playerService.getLoggedUser().getId());
+    		PlayerEntity player = playerService.findById(playerService.getLoggedUser().getId());
     		if(player != null) {
-    			Game game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), GameStatus.IN_PROGRESS.getValue());
+    			GameEntity game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), GameStatus.IN_PROGRESS.getValue());
     			if(game == null) {
     				game = gameService.createNewGame();
         	        playerService.updatePlayerFromGame(game);
@@ -82,9 +82,9 @@ public class GameController {
     	
     	try {
     		// Find if player has already an IN PROGRESS game => rejoin method
-    		Game game = gameService.findGameByIdAndIdPlayerOneOrIdPlayerTwo(idGame, playerService.getLoggedUser().getId());
+    		GameEntity game = gameService.findGameByIdAndIdPlayerOneOrIdPlayerTwo(idGame, playerService.getLoggedUser().getId());
     		if(game == null) {
-    			game = gameService.findGameByIdAndGameStatus(idGame, GameStatus.WAITS_FOR_PLAYER.getValue());
+    			game = gameService.findGameByIdAndGameStatus(idGame, mg.comteen.jpa.entity.GameStatus.WAITS_FOR_PLAYER.getValue());
             	if(game != null) {
             		// Update game status
             		gameService.updateGame(game);
@@ -147,7 +147,7 @@ public class GameController {
                     gameService.updateStateGame(parameterDto.getIdGame(), res.getState());
                     
                     //Update MoveHistory
-                    MoveHistory moveHistory = moveHistoryService.findByPlayerId(playerService.getLoggedUser().getId());
+                    MoveHistoryEntity moveHistory = moveHistoryService.findByPlayerId(playerService.getLoggedUser().getId());
                     if(moveHistory.getId() == null) {
                     	moveHistory.setPlayerId(playerService.getLoggedUser().getId());
                     	moveHistory.setDirectionHistory("");

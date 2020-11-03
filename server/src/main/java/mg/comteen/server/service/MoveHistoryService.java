@@ -5,7 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mg.comteen.server.data.entity.MoveHistory;
+import mg.comteen.jpa.entity.MoveHistoryEntity;
 import mg.comteen.server.repository.MoveHistoryRepository;
 
 @Service
@@ -15,12 +15,12 @@ public class MoveHistoryService {
 	@Autowired
 	private MoveHistoryRepository moveHistoryRepository;
 	
-	public MoveHistory findByPlayerId(long id) {
+	public MoveHistoryEntity findByPlayerId(long id) {
 		return moveHistoryRepository.findByPlayerId(id)
-									.orElseGet(MoveHistory::new);
+									.orElseGet(MoveHistoryEntity::new);
 	}
 	
-	public void save(MoveHistory moveHistory) {
+	public void save(MoveHistoryEntity moveHistory) {
 		moveHistoryRepository.save(moveHistory);
 	}
 
