@@ -119,6 +119,12 @@ public class GameController {
     	
     	return responseDto;
     }
+    
+    /**
+     * 
+     * @param parameterDto
+     * @return
+     */
     @RequestMapping(value = "/move", consumes = "application/json", method = RequestMethod.POST)
     public ResponseDto<?> hangleGame(@RequestBody ParameterDto parameterDto) {
     	ResponseDto<GameState> responseDto = new ResponseDto<>();
@@ -130,7 +136,7 @@ public class GameController {
     			param.setSourceStatePosition(parameterDto.getSource());
     			param.setDestStatePosition(parameterDto.getDestination());
     			param.setTypeMove(parameterDto.getTypeMove());
-    			param.setPhysicIdentityPlayer(playerService.getLoggedUser().getId());
+    			param.setRealPlayerID(playerService.getLoggedUser().getId());
     			
     			//Call akoalita core game library
     			GameState res = gameCore.executeGameEngine(parameterDto.getStateBoard(), param);

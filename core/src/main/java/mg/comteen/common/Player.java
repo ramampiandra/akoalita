@@ -9,7 +9,7 @@ public class Player {
 	
 	private char stoneColor;
 	
-	private long physicIdentity;
+	private long realPlayerID;
 	
 	private TypePlayer typePlayer;
 	
@@ -88,14 +88,6 @@ public class Player {
 		this.lastPosition = lastPosition;
 	}
 
-	public long getPhysicIdentity() {
-		return physicIdentity;
-	}
-
-	public void setPhysicIdentity(long physicIdentity) {
-		this.physicIdentity = physicIdentity;
-	}
-
 	public Position getCurrentPositionPiece() {
 		return currentPositionPiece;
 	}
@@ -119,5 +111,14 @@ public class Player {
 	public void setStoneColor(char stoneColor) {
 		this.stoneColor = stoneColor;
 	}
+
+	public long getRealPlayerID() {
+		return realPlayerID;
+	}
+
+	public void setRealPlayerID(long realPlayerID) {
+		this.realPlayerID = realPlayerID;
+	}
+	
 	
 }

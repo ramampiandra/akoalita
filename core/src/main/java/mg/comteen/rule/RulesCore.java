@@ -44,7 +44,8 @@ public class RulesCore implements Rules {
 		}
 		
 		if(!isDestinationAllowed(param)) {
-			throw new FanoronaException("This destination " + param.getDestStatePosition() + "is not allowed from the source point, can't move to this point");
+			throw new FanoronaException("This destination " + param.getDestStatePosition() + "/" + next 
+														+ " is not allowed from the source " +  param.getSourceStatePosition());
 		}
 		
 		return true;

@@ -24,7 +24,7 @@ public class Parameter implements Serializable {
 	private int typeMove = 1;
 	
 	// Current external player id
-	private long physicIdentityPlayer; 
+	private long realPlayerID; 
 
 	// Current player
 	private Player currentPlayer;
@@ -98,10 +98,10 @@ public class Parameter implements Serializable {
 	}
 
 	public void setCurrentPlayer(Player currentPlayer) {
-		if(currentPlayer.getPhysicIdentity() == physicIdentityPlayer) {
+		if(currentPlayer.getRealPlayerID() == realPlayerID) {
 			this.currentPlayer = currentPlayer;
 		} else {
-			throw new FanoronaException("It's not possible to move the other player's piece [Physical Identity Not Matching]");
+			throw new FanoronaException("It's not possible to move the other player's piece [Real Identity Not Matching]");
 		}
 	}
 
@@ -145,13 +145,15 @@ public class Parameter implements Serializable {
 		this.startProcessPosition = startProcessPosition;
 	}
 
-	public long getPhysicIdentityPlayer() {
-		return physicIdentityPlayer;
+	public long getRealPlayerID() {
+		return realPlayerID;
 	}
 
-	public void setPhysicIdentityPlayer(long physicIdentityPlayer) {
-		this.physicIdentityPlayer = physicIdentityPlayer;
+	public void setRealPlayerID(long realPlayerID) {
+		this.realPlayerID = realPlayerID;
 	}
+
+	
 	
 	
 

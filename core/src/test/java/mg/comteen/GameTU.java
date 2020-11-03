@@ -63,8 +63,8 @@ public class GameTU {
 		// Test param two
 		Parameter param = new Parameter();
 		param.setDirection(-1);
-		param.setSourceStatePosition(01);
-		param.setDestStatePosition(10);
+		param.setSourceStatePosition(14);
+		param.setDestStatePosition(23);
 		// withdraw move
 		param.setTypeMove(CAPTURING_ADVANCE);
 		// 1 Means Advance
@@ -75,8 +75,8 @@ public class GameTU {
 		param.setDirection(-1);
 /*		param.setSourceStatePosition(23);
 		param.setDestStatePosition(15);*/
-		param.setSourceStatePosition(16);
-		param.setDestStatePosition(07);
+		param.setSourceStatePosition(22);
+		param.setDestStatePosition(32);
 		param.setTypeMove(CAPTURING_WITHDRAWAL);
 		res = game.executeGameEngine(res.getState(), param);
 		

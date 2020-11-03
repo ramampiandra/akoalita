@@ -41,8 +41,8 @@ public class GameCore implements Game {
 	
 	public GameCore(long idSys1, long idSys2) {
 		this();
-		player[0].setPhysicIdentity(idSys1);
-		player[1].setPhysicIdentity(idSys2);
+		player[0].setRealPlayerID(idSys1);
+		player[1].setRealPlayerID(idSys2);
 	}
 	
 	
