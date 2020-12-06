@@ -1,5 +1,7 @@
 package mg.comteen.server.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -47,21 +49,24 @@ public class GameController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseDto<GameDto> createNewGame() {
+    	
     	ResponseDto<GameDto> responseDto = new ResponseDto<>();
    
     	try { 
     		PlayerEntity player = playerService.findById(playerService.getLoggedUser().getId());
     		if(player != null) {
-    			GameEntity game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), GameStatus.IN_PROGRESS.getValue());
-    			if(game == null) {
-    				game = gameService.createNewGame();
-        	        playerService.updatePlayerFromGame(game);
+    			Optional<GameEntity> game = gameService.findGameByIdAndGameStatus(player.getGame().getId(), GameStatus.IN_PROGRESS.getValue());
+    			GameEntity gameEntity = null;
+    			if(game.isEmpty()) {
+    				gameEntity = gameService.createNewGame();
+        	        playerService.updatePlayerFromGame(gameEntity);
     			} else {
-    				responseDto.setMessage("You already subscribed in this game " + game.getId());
+    				gameEntity = game.get();
+    				responseDto.setMessage("You already subscribed in this game " + gameEntity.getId());
     				responseDto.setStatus(false);
     			}
     			
-    			responseDto.setData(GameDto.getInstance(game));
+    			responseDto.setData(GameDto.getInstance(gameEntity));
     		}
     	} catch (Exception e) {
 			responseDto.setStatus(false);
@@ -82,18 +87,19 @@ public class GameController {
     	
     	try {
     		// Find if player has already an IN PROGRESS game => rejoin method
-    		GameEntity game = gameService.findGameByIdAndIdPlayerOneOrIdPlayerTwo(idGame, playerService.getLoggedUser().getId());
-    		if(game == null) {
+    		Optional<GameEntity> game = gameService.findGameByIdAndIdPlayerOneOrIdPlayerTwo(idGame, playerService.getLoggedUser().getId());
+    		if(game.isEmpty()) {
     			game = gameService.findGameByIdAndGameStatus(idGame, mg.comteen.jpa.entity.GameStatus.WAITS_FOR_PLAYER.getValue());
-            	if(game != null) {
+            	if(game.isPresent()) {
+            		GameEntity gameEntity = game.get();
             		// Update game status
-            		gameService.updateGame(game);
+            		gameService.updateGame(gameEntity);
             		// Update idGame on Player two
-            		playerService.updatePlayerFromGame(game);
+            		playerService.updatePlayerFromGame(gameEntity);
             		// Start game
-            		httpSession.setAttribute(game.getId() + "", gameService.startGame(game));
+            		httpSession.setAttribute(gameEntity.getId() + "", gameService.startGame(gameEntity));
             		
-            		GameDto gameDto = GameDto.getInstance(game);
+            		GameDto gameDto = GameDto.getInstance(gameEntity);
         	        responseDto.setData(gameDto);
             	} else {
             		responseDto.setMessage("Game is already in progress or finished ");
@@ -101,12 +107,14 @@ public class GameController {
             	}
     		} else {
     			GameCore gameCore = (GameCore)httpSession.getAttribute(idGame + "");
+        		GameEntity gameEntity = game.get();
+
     			if(gameCore == null) {
     				GameLoading gameLoading = new GameLoading();
     				// Reload game
-            		httpSession.setAttribute(game.getId() + "", gameService.reloadGame(game, gameLoading));
+            		httpSession.setAttribute(gameEntity.getId() + "", gameService.reloadGame(gameEntity, gameLoading));
             		responseDto.setMessage("You rejoined the game " + idGame);
-            		responseDto.setData(GameDto.getInstance(game));
+            		responseDto.setData(GameDto.getInstance(gameEntity));
     			} else {
     				responseDto.setMessage("You has already joined the game " + idGame);
     			}

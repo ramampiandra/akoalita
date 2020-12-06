@@ -2,6 +2,7 @@ package mg.comteen.server.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,20 +35,26 @@ public class GameService {
         return game;
     }
 	
-	public GameEntity findById(long id) {
-		return gameRepository.findById(id).get();
+	public Optional<GameEntity> findById(long id) {
+		return gameRepository.findById(id);
 	}
 	
-	public GameEntity updateGame(GameEntity game) {
+	public Optional<GameEntity> updateGame(GameEntity game) {
 		game.setIdPlayerTwo(playerService.getLoggedUser().getId());
 		game.setGameStatus("IN_PROGRESS");
-		return gameRepository.save(game);
+		return Optional.of(gameRepository.save(game));
 	}
 	
-	public GameEntity updateStateGame(Long id, String state) {
-		GameEntity game = findById(id);
-		game.setLastState(state);
-		return gameRepository.save(game);
+	
+	public Optional<GameEntity> updateStateGame(Long id, String state) {
+		Optional<GameEntity> game = findById(id);
+		if(game.isPresent()) {
+			GameEntity gameEntity = game.get();
+			gameEntity.setLastState(state);
+			gameEntity = gameRepository.save(gameEntity);
+			return Optional.of(gameEntity);
+		}
+		return Optional.empty();
 	}
 	
 	public GameCore startGame(GameEntity game) {
@@ -61,23 +68,23 @@ public class GameService {
 		return gameCore;
 	}
 	
-	public GameEntity findGameByIdAndGameStatus(Long Id, String gameStatus) {
+	public Optional<GameEntity> findGameByIdAndGameStatus(Long Id, String gameStatus) {
 		List<GameEntity> gameList = gameRepository.findGameByIdAndGameStatus(Id, gameStatus);
 		if(gameList != null && gameList.size() > 0) {
-			return gameList.get(0);
+			return Optional.of(gameList.get(0));
 		}
-		return null;
+		return Optional.empty();
 	}
 	
-	public GameEntity findGameByIdAndIdPlayerOneOrIdPlayerTwo(Long Id, Long idPlayer) {
-		GameEntity game = findById(Id);
-		if(game == null) {
+	public Optional<GameEntity> findGameByIdAndIdPlayerOneOrIdPlayerTwo(Long Id, Long idPlayer) {
+		Optional<GameEntity> game = findById(Id);
+		if(game.isEmpty()) {
 			throw new FanoronaException("Game not found");
 		}
 		List<GameEntity> gameList = gameRepository.findGameByIdAndIdPlayerOneOrIdPlayerTwo(Id, idPlayer, idPlayer);
 		if(gameList != null && gameList.size() > 0) {
-			return gameList.get(0);
+			return Optional.of(gameList.get(0));
 		}
-		return null;
+		return Optional.empty();
 	}
 }

@@ -18,11 +18,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@EntityScan(basePackages = {"mg.comteen.jpa.entity"})
+@EntityScan(basePackages = {ServerApplication.BASE_PACKAGES})
 public class ServerApplication {
 	
-	private static final String CONTROLLER_PACKAGE = "mg.comteen.server.controller";
+	public static final String BASE_PACKAGES = "mg.comteen.jpa.entity";
 	
+	private static final String CONTROLLER_PACKAGE = "mg.comteen.server.controller";
+		
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);
 	}
