@@ -10,7 +10,7 @@ Akoalita have two (android is not included) modules :<br>
 * <b>server</b> : it's a poc/example module to illustrate the integration of the core module in a real project. 
 * <b>android</b> : coming soon, an UI implementation using the core and server module.
 
-I also use this project for teaching programming. 
+We use this project for teaching programming as well. 
 
 ### Prerequisites
 * Java 11 (Amazon Corretto 11)
